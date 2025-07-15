@@ -28,29 +28,29 @@ return {
         },
       },
     },
-    keys = {
-      {
-        "<leader>.",
-        function()
-          Snacks.scratch()
-        end,
-        desc = "Toggle Scratch Buffer",
-      },
-      {
-        "<leader>S",
-        function()
-          Snacks.scratch.select()
-        end,
-        desc = "Select Scratch Buffer",
-      },
-      {
-        "<leader>gB",
-        function()
-          Snacks.gitbrowse.open({ what = "commit" })
-        end,
-        desc = "Git Browse",
-        mode = { "n", "v" },
-      },
+  },
+  keys = {
+    {
+      "<leader>.",
+      function()
+        Snacks.scratch()
+      end,
+      desc = "Toggle Scratch Buffer",
+    },
+    {
+      "<leader>S",
+      function()
+        Snacks.scratch.select()
+      end,
+      desc = "Select Scratch Buffer",
+    },
+    {
+      "<leader>gB",
+      function()
+        Snacks.gitbrowse.open({ what = "commit" })
+      end,
+      desc = "Git Browse",
+      mode = { "n", "v" },
     },
   },
 }

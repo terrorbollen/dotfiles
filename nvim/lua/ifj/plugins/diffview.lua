@@ -20,7 +20,7 @@ return {
       view = {
         merge_tool = {
           layout = "diff3_mixed",
-          disable_diagnostics = true,
+          disable_diagnostics = false,
           winbar_info = true,
         },
       },
