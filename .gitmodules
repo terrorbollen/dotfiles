@@ -1,0 +1,3 @@
+[submodule "nvim/lua/ifj/custom/type.nvim"]
+	path = nvim/lua/ifj/custom/type.nvim
+	url = git@github.com:terrorbollen/type.nvim.git
