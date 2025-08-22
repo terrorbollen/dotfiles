@@ -89,10 +89,10 @@ shift-alt-l = ['focus --boundaries-action stop right', 'move-mouse window-force-
 [mode.alt.binding]
 ctrl-alt-n = ['mode alt']
 space = ['mode main']
-esc = ['mode alt']
+esc = ['mode main']
 ctrl-alt-r = ['reload-config', 'mode main']
 
-slash = 'layout tiles horizontal vertical'
+period = 'layout tiles horizontal vertical'
 comma = 'layout accordion horizontal vertical'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus
@@ -159,7 +159,7 @@ shift-f = ['layout floating tiling', 'mode alt'] # Toggle between floating and t
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#mode
 r =  'mode resize'
-semicolon = 'mode spacial'
+s = 'mode spacial'
 w = 'mode workspace'
 
 [mode.resize.binding]
@@ -180,10 +180,10 @@ shift-l = ['resize width +8']
 ctrl-alt-n = ['mode special']
 space = 'mode main'
 esc = 'mode alt'
-h = ['join-with left', 'mode alt']
-j = ['join-with down', 'mode alt']
-k = ['join-with up', 'mode alt']
-l = ['join-with right', 'mode alt']
+h = ['join-with left']
+j = ['join-with down']
+k = ['join-with up']
+l = ['join-with right']
 
 [mode.workspace.binding]
 ctrl-alt-n = ['mode wordspace']
