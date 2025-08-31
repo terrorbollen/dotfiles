@@ -3,6 +3,9 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+source "/opt/homebrew/opt/fzf/shell/completion.zsh"
+source "/opt/homebrew/opt/fzf/shell/key-bindings.zsh"
+
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -90,13 +93,10 @@ export PATH="$PATH:/Users/isakfriis-jespersen/.local/bin"
 ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
 ZVM_VI_VISUAL_ESCAPE_BINDKEY=jk
 
-
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source <(fzf --zsh)
 
+export FZF_DEFAULT_OPTS='--height 40% --tmux bottom,40% --layout reverse --border top'
 export FZF_CTRL_R_OPTS="
   --preview 'echo {}' \
   --preview-window=up:3:wrap \
@@ -104,5 +104,5 @@ export FZF_CTRL_R_OPTS="
   --color header:italic \
   --header 'Press CTRL-Y to copy command into clipboard'"
 
-export PATH="/opt/homebrew/opt/node@22/bin:$PATH"
 
+export PATH="/opt/homebrew/opt/node@22/bin:$PATH"

@@ -75,6 +75,10 @@ return {
           vim.cmd("vsplit")
           vim.lsp.buf.definition()
         end, opts)
+        keymap.set("n", "ghd", function()
+          vim.cmd("hsplit")
+          vim.lsp.buf.definition()
+        end, opts)
       end,
     })
 

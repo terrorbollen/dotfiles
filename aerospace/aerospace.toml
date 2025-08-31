@@ -12,7 +12,9 @@ after-login-command = []
 # You can use it to add commands that run after AeroSpace startup.
 # 'after-startup-command' is run after 'after-login-command'
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
-after-startup-command = []
+after-startup-command = [
+  'exec-and-forget borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=2'
+]
 
 # Start AeroSpace at login
 start-at-login = true
@@ -60,34 +62,37 @@ outer.bottom =     0
 outer.top =        0
 outer.right =      0
 
-#
-# Bindings
-#
-
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 # 'main' binding mode must be always presented
 [mode.main.binding]
-ctrl-alt-n = ['mode alt']
-ctrl-1 = 'workspace 1'
-ctrl-2 = 'workspace 2'
-ctrl-3 = 'workspace 3'
-ctrl-4 = 'workspace 4'
-ctrl-5 = 'workspace 5'
-ctrl-6 = 'workspace 6'
-ctrl-7 = 'workspace 7'
-ctrl-8 = 'workspace 8'
-ctrl-9 = 'workspace 9'
-ctrl-0 = 'workspace 10'
+alt-e = ['mode alt']
+alt-1 = 'workspace 1'
+alt-2 = 'workspace 2'
+alt-3 = 'workspace 3'
+alt-4 = 'workspace 4'
+alt-5 = 'workspace 5'
+alt-6 = 'workspace 6'
+alt-7 = 'workspace 7'
+alt-8 = 'workspace 8'
+alt-9 = 'workspace 9'
+alt-0 = 'workspace 10'
 
 shift-alt-h = ['focus --boundaries-action stop left', 'move-mouse window-force-center']
 shift-alt-j = ['focus --boundaries-action stop down', 'move-mouse window-force-center']
 shift-alt-k = ['focus --boundaries-action stop up', 'move-mouse window-force-center']
 shift-alt-l = ['focus --boundaries-action stop right', 'move-mouse window-force-center']
 
+alt-o = 'exec-and-forget open -a /Applications/Obsidian.app'
+alt-s = 'exec-and-forget open -a /Applications/Slack.app'
+alt-a = 'exec-and-forget open -a /Applications/Alacritty.app'
+alt-c = "exec-and-forget open -a 'Google Chrome'"
+
+alt-f = ['fullscreen'] # Toggle between fullscreen
+
 # 'alt' binding mode declaration
 [mode.alt.binding]
-ctrl-alt-n = ['mode alt']
+alt-e = ['mode alt']
 space = ['mode main']
 esc = ['mode main']
 ctrl-alt-r = ['reload-config', 'mode main']
@@ -118,8 +123,10 @@ shift-equal = 'resize smart +128'
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
 u = 'workspace prev'
 i = 'workspace next'
+
 shift-u = 'move-node-to-workspace prev'
 shift-i = 'move-node-to-workspace next'
+
 1 = 'workspace 1'
 2 = 'workspace 2'
 3 = 'workspace 3'
@@ -130,8 +137,10 @@ shift-i = 'move-node-to-workspace next'
 8 = 'workspace 8'
 9 = 'workspace 9'
 0 = 'workspace 10'
+
 p = ['focus-monitor prev', 'move-mouse window-force-center']
 n = ['focus-monitor next', 'move-mouse window-force-center']
+
 shift-p = 'move-workspace-to-monitor prev'
 shift-n = 'move-workspace-to-monitor next'
 
@@ -153,7 +162,9 @@ tab = 'workspace-back-and-forth'
 shift-tab = 'move-workspace-to-monitor --wrap-around next'
 
 shift-r = ['flatten-workspace-tree', 'mode alt'] # reset layout
+
 #s = ['layout sticky tiling', 'mode alt'] # sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
+
 f = ['fullscreen'] # Toggle between fullscreen
 shift-f = ['layout floating tiling', 'mode alt'] # Toggle between floating and tiling layout
 
@@ -163,7 +174,7 @@ s = 'mode spacial'
 w = 'mode workspace'
 
 [mode.resize.binding]
-ctrl-alt-n = ['mode binding']
+alt-e = ['mode binding']
 space = 'mode main'
 esc = 'mode alt'
 r = 'mode alt'
@@ -177,7 +188,7 @@ shift-k = ['resize height +8']
 shift-l = ['resize width +8']
 
 [mode.spacial.binding]
-ctrl-alt-n = ['mode special']
+alt-e = ['mode special']
 space = 'mode main'
 esc = 'mode alt'
 h = ['join-with left']
@@ -186,7 +197,7 @@ k = ['join-with up']
 l = ['join-with right']
 
 [mode.workspace.binding]
-ctrl-alt-n = ['mode wordspace']
+alt-e = ['mode wordspace']
 space = 'mode main'
 esc = 'mode alt'
 w = 'mode alt'
@@ -203,6 +214,46 @@ shift-j = ['move-node-to-monitor next']
 # Application-specific configurations (optional)
 #
 
-# [[on-window-detected]]
-# if.app-id = 'com.apple.reminders'
-# run = 'layout floating'
+[[on-window-detected]]
+if.app-name-regex-substring = 'finder'
+run = 'layout floating'
+ 
+[[on-window-detected]]
+if.app-name-regex-substring = 'camera'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'mail'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'discord'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'messenger'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'messeges'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'numbers'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'photos'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'docker'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'spotify'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'calendar'
+run = 'layout floating'

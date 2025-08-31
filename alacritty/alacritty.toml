@@ -46,6 +46,16 @@ key = "S"
 mods = "Control|Shift"
 chars = "\u2665" ## ♥
 
+[[keyboard.bindings]]
+key = "J"
+mods = "Control|Alt"
+chars = "\u2666" ## ♦
+
+[[keyboard.bindings]]
+key = "K"
+mods = "Control|Alt"
+chars = "\u2667" ## ♧
+
 [general]
 import = [
   "~/.config/alacritty/catppuccin-mocha.toml"
