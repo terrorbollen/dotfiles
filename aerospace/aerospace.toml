@@ -71,22 +71,20 @@ alt-1 = 'workspace 1'
 alt-2 = 'workspace 2'
 alt-3 = 'workspace 3'
 alt-4 = 'workspace 4'
-alt-5 = 'workspace 5'
-alt-6 = 'workspace 6'
-alt-7 = 'workspace 7'
-alt-8 = 'workspace 8'
-alt-9 = 'workspace 9'
-alt-0 = 'workspace 10'
 
-shift-alt-h = ['focus --boundaries-action stop left', 'move-mouse window-force-center']
-shift-alt-j = ['focus --boundaries-action stop down', 'move-mouse window-force-center']
-shift-alt-k = ['focus --boundaries-action stop up', 'move-mouse window-force-center']
-shift-alt-l = ['focus --boundaries-action stop right', 'move-mouse window-force-center']
+shift-alt-h = ['focus --boundaries-action wrap-around-the-workspace left', 'move-mouse window-force-center']
+shift-alt-l = ['focus --boundaries-action wrap-around-the-workspace right', 'move-mouse window-force-center']
+shift-alt-j = ['focus --boundaries-action wrap-around-the-workspace dfs-next', 'move-mouse window-lazy-center']
+shift-alt-k = ['focus --boundaries-action wrap-around-the-workspace dfs-prev', 'move-mouse window-lazy-center']
 
 alt-o = 'exec-and-forget open -a /Applications/Obsidian.app'
 alt-s = 'exec-and-forget open -a /Applications/Slack.app'
 alt-a = 'exec-and-forget open -a /Applications/Alacritty.app'
 alt-c = "exec-and-forget open -a 'Google Chrome'"
+alt-k = "exec-and-forget open -a 'Calendar'"
+alt-l = "exec-and-forget open -a /Applications/Linear.app"
+alt-n = "exec-and-forget open -a /Applications/Lens.app"
+alt-d = "exec-and-forget open -a /Applications/Docker.app"
 
 alt-f = ['fullscreen'] # Toggle between fullscreen
 
@@ -131,12 +129,6 @@ shift-i = 'move-node-to-workspace next'
 2 = 'workspace 2'
 3 = 'workspace 3'
 4 = 'workspace 4'
-5 = 'workspace 5'
-6 = 'workspace 6'
-7 = 'workspace 7'
-8 = 'workspace 8'
-9 = 'workspace 9'
-0 = 'workspace 10'
 
 p = ['focus-monitor prev', 'move-mouse window-force-center']
 n = ['focus-monitor next', 'move-mouse window-force-center']
@@ -149,12 +141,6 @@ shift-1 = 'move-node-to-workspace 1'
 shift-2 = 'move-node-to-workspace 2'
 shift-3 = 'move-node-to-workspace 3'
 shift-4 = 'move-node-to-workspace 4'
-shift-5 = 'move-node-to-workspace 5'
-shift-6 = 'move-node-to-workspace 6'
-shift-7 = 'move-node-to-workspace 7'
-shift-8 = 'move-node-to-workspace 8'
-shift-9 = 'move-node-to-workspace 9'
-shift-0 = 'move-node-to-workspace 10'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 tab = 'workspace-back-and-forth'
@@ -255,5 +241,21 @@ if.app-name-regex-substring = 'spotify'
 run = 'layout floating'
 
 [[on-window-detected]]
+if.app-name-regex-substring = 'slack'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'linear'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'lens'
+run = 'layout floating'
+
+[[on-window-detected]]
 if.app-name-regex-substring = 'calendar'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'bitwarden'
 run = 'layout floating'
