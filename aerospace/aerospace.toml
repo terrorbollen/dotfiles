@@ -67,10 +67,10 @@ outer.right =      0
 # 'main' binding mode must be always presented
 [mode.main.binding]
 alt-e = ['mode alt']
-alt-1 = 'workspace 1'
-alt-2 = 'workspace 2'
-alt-3 = 'workspace 3'
-alt-4 = 'workspace 4'
+shift-alt-1 = 'workspace 1'
+shift-alt-2 = 'workspace 2'
+shift-alt-3 = 'workspace 3'
+shift-alt-4 = 'workspace 4'
 
 shift-alt-h = ['focus --boundaries-action wrap-around-the-workspace left', 'move-mouse window-force-center']
 shift-alt-l = ['focus --boundaries-action wrap-around-the-workspace right', 'move-mouse window-force-center']
@@ -84,7 +84,9 @@ alt-c = "exec-and-forget open -a 'Google Chrome'"
 alt-k = "exec-and-forget open -a 'Calendar'"
 alt-l = "exec-and-forget open -a /Applications/Linear.app"
 alt-n = "exec-and-forget open -a /Applications/Lens.app"
-alt-d = "exec-and-forget open -a /Applications/Docker.app"
+alt-m = "exec-and-forget open -a /Applications/Messenger.app"
+alt-p = "exec-and-forget open -a 'Messages'"
+alt-d = "exec-and-forget open -a 'Docker Desktop'"
 
 alt-f = ['fullscreen'] # Toggle between fullscreen
 
@@ -221,7 +223,7 @@ if.app-name-regex-substring = 'messenger'
 run = 'layout floating'
 
 [[on-window-detected]]
-if.app-name-regex-substring = 'messeges'
+if.app-name-regex-substring = 'messages'
 run = 'layout floating'
 
 [[on-window-detected]]
@@ -254,8 +256,4 @@ run = 'layout floating'
 
 [[on-window-detected]]
 if.app-name-regex-substring = 'calendar'
-run = 'layout floating'
-
-[[on-window-detected]]
-if.app-name-regex-substring = 'bitwarden'
 run = 'layout floating'
