@@ -81,14 +81,16 @@ alt-o = 'exec-and-forget open -a /Applications/Obsidian.app'
 alt-s = 'exec-and-forget open -a /Applications/Slack.app'
 alt-a = 'exec-and-forget open -a /Applications/Alacritty.app'
 alt-c = "exec-and-forget open -a 'Google Chrome'"
-alt-k = "exec-and-forget open -a 'Calendar'"
-alt-l = "exec-and-forget open -a /Applications/Linear.app"
-alt-n = "exec-and-forget open -a /Applications/Lens.app"
+alt-b = "exec-and-forget open -a 'Calendar'"
+alt-r = "exec-and-forget open -a /Applications/Linear.app"
+alt-w = "exec-and-forget open -a /Applications/Lens.app"
 alt-m = "exec-and-forget open -a /Applications/Messenger.app"
-alt-p = "exec-and-forget open -a 'Messages'"
+alt-i = "exec-and-forget open -a 'Messages'"
 alt-d = "exec-and-forget open -a 'Docker Desktop'"
 
+
 alt-f = ['fullscreen'] # Toggle between fullscreen
+alt-period = ['''exec-and-forget aerospace layout floating && osascript -e 'tell application "System Events" to key code 120 using {control down, option down, command down}' || aerospace layout tiling''', 'mode main']
 
 # 'alt' binding mode declaration
 [mode.alt.binding]
@@ -139,10 +141,10 @@ shift-p = 'move-workspace-to-monitor prev'
 shift-n = 'move-workspace-to-monitor next'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
-shift-1 = 'move-node-to-workspace 1'
-shift-2 = 'move-node-to-workspace 2'
-shift-3 = 'move-node-to-workspace 3'
-shift-4 = 'move-node-to-workspace 4'
+alt-1 = 'move-node-to-workspace 1'
+alt-2 = 'move-node-to-workspace 2'
+alt-3 = 'move-node-to-workspace 3'
+alt-4 = 'move-node-to-workspace 4'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 tab = 'workspace-back-and-forth'
@@ -256,4 +258,8 @@ run = 'layout floating'
 
 [[on-window-detected]]
 if.app-name-regex-substring = 'calendar'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'notes'
 run = 'layout floating'
