@@ -81,15 +81,16 @@ alt-o = 'exec-and-forget open -a /Applications/Obsidian.app'
 alt-s = 'exec-and-forget open -a /Applications/Slack.app'
 alt-a = 'exec-and-forget open -a /Applications/Alacritty.app'
 alt-c = "exec-and-forget open -a 'Google Chrome'"
-alt-b = "exec-and-forget open -a 'Calendar'"
 alt-r = "exec-and-forget open -a /Applications/Linear.app"
 alt-w = "exec-and-forget open -a /Applications/Lens.app"
-alt-m = "exec-and-forget open -a /Applications/Messenger.app"
 alt-i = "exec-and-forget open -a 'Messages'"
 alt-d = "exec-and-forget open -a 'Docker Desktop'"
+alt-b = "exec-and-forget open -a 'Calendar'"
+alt-n = "exec-and-forget open -a 'Notes'"
+alt-m = "exec-and-forget open -a /Applications/Messenger.app"
 
 
-alt-f = ['fullscreen'] # Toggle between fullscreen
+alt-f = ['fullscreen']
 alt-period = ['''exec-and-forget aerospace layout floating && osascript -e 'tell application "System Events" to key code 120 using {control down, option down, command down}' || aerospace layout tiling''', 'mode main']
 
 # 'alt' binding mode declaration
@@ -99,8 +100,8 @@ space = ['mode main']
 esc = ['mode main']
 ctrl-alt-r = ['reload-config', 'mode main']
 
-period = 'layout tiles horizontal vertical'
-comma = 'layout accordion horizontal vertical'
+period = ['fullscreen off', 'layout tiles horizontal vertical']
+comma = ['fullscreen off','layout accordion horizontal vertical']
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus
 h = ['focus --boundaries-action stop left', 'move-mouse window-force-center']
@@ -117,10 +118,11 @@ shift-k = 'move up'
 shift-l = 'move right'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#resize
-minus = 'resize smart -64'
-equal = 'resize smart +64'
-shift-minus = 'resize smart -128'
-shift-equal = 'resize smart +128'
+minus = 'resize smart -128'
+equal = 'resize smart +128'
+
+alt-l = 'resize smart -128'
+alt-h = 'resize smart +128'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
 u = 'workspace prev'
