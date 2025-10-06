@@ -77,23 +77,22 @@ shift-alt-l = ['focus --boundaries-action wrap-around-the-workspace right', 'mov
 shift-alt-j = ['focus --boundaries-action wrap-around-the-workspace dfs-next', 'move-mouse window-lazy-center']
 shift-alt-k = ['focus --boundaries-action wrap-around-the-workspace dfs-prev', 'move-mouse window-lazy-center']
 
+
 alt-o = 'exec-and-forget open -a /Applications/Obsidian.app'
 alt-s = 'exec-and-forget open -a /Applications/Slack.app'
 alt-a = 'exec-and-forget open -a /Applications/Alacritty.app'
 alt-c = "exec-and-forget open -a 'Google Chrome'"
-alt-r = "exec-and-forget open -a /Applications/Linear.app"
+alt-l = "exec-and-forget open -a /Applications/Linear.app"
 alt-w = "exec-and-forget open -a /Applications/Lens.app"
-alt-i = "exec-and-forget open -a 'Messages'"
 alt-d = "exec-and-forget open -a 'Docker Desktop'"
 alt-b = "exec-and-forget open -a 'Calendar'"
 alt-n = "exec-and-forget open -a 'Notes'"
+shift-alt-m = "exec-and-forget open -a 'Messages'"
 alt-m = "exec-and-forget open -a /Applications/Messenger.app"
-
 
 alt-f = ['fullscreen']
 alt-period = ['''exec-and-forget aerospace layout floating && osascript -e 'tell application "System Events" to key code 120 using {control down, option down, command down}' || aerospace layout tiling''', 'mode main']
 
-# 'alt' binding mode declaration
 [mode.alt.binding]
 alt-e = ['mode alt']
 space = ['mode main']
