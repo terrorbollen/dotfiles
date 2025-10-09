@@ -14,7 +14,7 @@ return {
 
     -- local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
-    local keymap = vim.keymap-- for conciseness
+    local keymap = vim.keymap -- for conciseness
 
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("UserLspConfig", {}),
@@ -82,9 +82,8 @@ return {
       end,
     })
 
-
     -- used to enable autocompletion (assign to every lsp server config)
-    local capabilities = require('blink.cmp').get_lsp_capabilities()
+    local capabilities = require("blink.cmp").get_lsp_capabilities()
 
     -- Change the Diagnostic symbols in the sign column (gutter)
     -- (not in youtube nvim video)
@@ -147,16 +146,14 @@ return {
           },
         })
       end,
-      ["helm_ls"] = function()
-        lspconfig["helm_ls"].setup({
-          settings = {
-            ["helm-ls"] = {
-              yamlls = {
-                path = "yamlls",
-              },
-            },
-          },
-        })
+      [ "yamlls" ] = function()
+          on_attach = function(client, buffer)
+          if vim.bo[buffer].filetype == "helm" then
+            vim.schedule(function()
+              vim.cmd("LspStop ++force yamlls")
+            end)
+          end
+        end
       end,
       ["gopls"] = function()
         lspconfig["gopls"].setup({
@@ -175,6 +172,6 @@ return {
           filetypes = { "handlebars", "typescript", "javascript", "typescript.glimmer", "javascript.glimmer" },
         })
       end,
-  })
-end,
+    })
+  end,
 }
