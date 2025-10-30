@@ -6,7 +6,6 @@ keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode with jk" })
 keymap.set("v", "JK", "<ESC>", { desc = "Exit insert mode with jk" })
 keymap.set("v", "<", "<gv") keymap.set("v", ">", ">gv")
 
-
 -- Junp down/up center cursor
 keymap.set("n", "<C-u>", "<C-u>zz")
 keymap.set("n", "<C-d>", "<C-d>zz")

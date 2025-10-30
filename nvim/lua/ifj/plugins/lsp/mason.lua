@@ -1,11 +1,9 @@
 return {
   "williamboman/mason.nvim",
-  tag = "v1.11.0",
   dependencies = {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     {
       "williamboman/mason-lspconfig.nvim",
-      tag = "v1.32.0"
     }
   },
   config = function()
@@ -56,9 +54,9 @@ return {
     mason_tool_installer.setup({
       ensure_installed = {
         "prettier", -- prettier formatter
-        "stylua", -- lua formatter
-        "isort", -- python formatter
-        "black", -- python formatter
+        "stylua",   -- lua formatter
+        "isort",    -- python formatter
+        "black",    -- python formatter
         -- "pylint",
         "eslint_d",
       },
