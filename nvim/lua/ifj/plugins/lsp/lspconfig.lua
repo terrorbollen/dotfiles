@@ -71,12 +71,13 @@ return {
         keymap.set("n", "<leader><leader>", ":Telescope buffers<CR>", opts) -- mapping to restart lsp if necessary
 
         opts.desc = "Go to definition in vertical split"
-        keymap.set("n", "gvd", function()
+        keymap.set("n", "gv", function()
           vim.cmd("vsplit")
           vim.lsp.buf.definition()
         end, opts)
-        keymap.set("n", "ghd", function()
-          vim.cmd("hsplit")
+
+        keymap.set("n", "gh", function()
+          vim.cmd("split")
           vim.lsp.buf.definition()
         end, opts)
       end,
@@ -146,8 +147,8 @@ return {
           },
         })
       end,
-      [ "yamlls" ] = function()
-          on_attach = function(client, buffer)
+      ["yamlls"] = function()
+        on_attach = function(_, buffer)
           if vim.bo[buffer].filetype == "helm" then
             vim.schedule(function()
               vim.cmd("LspStop ++force yamlls")

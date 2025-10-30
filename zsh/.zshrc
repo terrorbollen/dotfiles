@@ -52,7 +52,8 @@ zsh-syntax-highlighting
 kubectl
 zsh-vi-mode
 )
-DISABLE_AUTO_UPDATE=true
+DISABLE_AUTO_UPDATE=false
+ZVM_SYSTEM_CLIPBOARD_ENABLED=true
 
 source $ZSH/oh-my-zsh.sh
 
@@ -76,7 +77,6 @@ fi
 # Example aliases
 # alias zshconfig="mate ~/.config/zsh/.zshrc"
 # alias ohmyzsh="mate ~/.config/zsh/.oh-my-zsh"
-# source $HOME/coding/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
@@ -91,7 +91,6 @@ alias ls='eza'
 export PATH="$PATH:/Users/isakfriis-jespersen/.local/bin"
 
 ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
-ZVM_VI_VISUAL_ESCAPE_BINDKEY=jk
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source <(fzf --zsh)
