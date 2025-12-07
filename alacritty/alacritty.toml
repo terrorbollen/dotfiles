@@ -5,6 +5,15 @@ TERM = "xterm-256color"
 [font]
 size = 14.0
 
+[cursor]
+style = "Block"
+
+[colors.cursor]
+cursor = "#f4bf75"   # yellow cursor
+
+[colors.normal]
+yellow = "#f4bf75"
+
 [font.bold]
 family = "MesloLGS Nerd Font Mono"
 style = "Bold"
