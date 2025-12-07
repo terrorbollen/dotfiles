@@ -3,10 +3,15 @@ vim.g.mapleader = " "
 local keymap = vim.keymap -- for conciseness
 
 keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode with jk" })
-keymap.set("v", "JK", "<ESC>", { desc = "Exit insert mode with jk" })
-keymap.set("v", "<", "<gv") keymap.set("v", ">", ">gv")
+keymap.set("v", "JK", "<ESC>", { desc = "Exit visual mode with JK" })
+keymap.set("v", "<", "<gv")
+keymap.set("v", ">", ">gv")
+
+-- Paste in inser mode
+keymap.set("i", "<C-p>", "<Esc>\"+pa", { desc = "Paste in insert mode" })
 
 -- Junp down/up center cursor
+
 keymap.set("n", "<C-u>", "<C-u>zz")
 keymap.set("n", "<C-d>", "<C-d>zz")
 
@@ -34,7 +39,6 @@ keymap.set("n", "<leader>nh", ":nohl<CR>", { desc = "Clear search highlights" })
 -- delete single character:without copying into register
 keymap.set("n", "x", '"_x')
 
-
 -- increment/decrement numbers
 keymap.set("n", "<leader>+", "<C-a>", { desc = "Increment number" }) -- increment
 keymap.set("n", "<leader>-", "<C-x>", { desc = "Decrement number" }) -- decrement
@@ -53,3 +57,6 @@ keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer
 
 keymap.set("n", "<leader>qr", ":cgetexpr getqflist()<CR>", { noremap = true, silent = true })
 
+vim.api.nvim_create_user_command("CloseBuffers", "%bd | e#", {
+  desc = "Close all buffers",
+})
