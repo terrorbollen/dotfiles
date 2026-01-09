@@ -28,17 +28,32 @@ return {
       end,
     })
 
+
+    -- Use nvim tree node ass cwd 
+    require("telescope.builtin").find_files({
+      cwd = vim.fn.getcwd(),
+    })
+
     telescope.setup({
-      -- pickers = {
-      --   find_files = {
-      --     hidden = true,
-      --   },
-      -- },
+      pickers = {
+        find_files = {
+          hidden = true,
+        },
+      },
 
       extension = {
         fzf = {},
       },
       defaults = {
+        file_ignore_patterns = {
+          "%.git/",
+          "%.venv/",
+          "%.next/",
+          "%.cache/",
+          "node_modules/",
+          "__pycache__/",
+          "%.pyc",
+        },
         path_display = { "smart" },
         mappings = {
           i = {

@@ -28,6 +28,12 @@ return {
 
     nvimtree.setup({
       on_attach = on_attach,
+      sync_root_with_cwd = true,
+      respect_buf_cwd = true,
+      hijack_directories = {
+        enable = false,
+        auto_open = false,
+      },
       view = {
         width = 50,
         relativenumber = true,
@@ -59,6 +65,7 @@ return {
       },
       update_focused_file = {
         enable = true,
+        update_root = true,
       },
       filters = {
         custom = { ".DS_Store", "__pycache__" },
