@@ -16,6 +16,19 @@ return {
       desc = "Enable Copilot",
     })
 
+    vim.keymap.set("i", "<C-]>", 'copilot#Next()', {
+      expr = true,
+      replace_keycodes = false,
+      desc = "Next Copilot suggestion",
+    })
+
+    vim.keymap.set("i", "<C-[>", 'copilot#Previous()', {
+      expr = true,
+      replace_keycodes = false,
+      desc = "Previous Copilot suggestion",
+    })
+
+
     vim.keymap.set("n", "<leader>cd", function()
       vim.cmd(":Copilot disable", {
         desc = "Disable Copilot",

@@ -24,7 +24,7 @@ return {
         host = "localhost",
         port = "${port}",
         executable = {
-          command = "js-debug-adapter",  -- installed by mason
+          command = "js-debug-adapter", -- installed by mason
           -- 💀 Make sure to update this path to point to your installation
           args = {
             -- "/Users/isakfriis-jespersen/Downloads/vscode-js-debug-1.104.0/src/dapDebugServer.ts",

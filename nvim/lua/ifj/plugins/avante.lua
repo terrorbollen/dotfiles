@@ -5,10 +5,11 @@ return {
   build = vim.fn.has("win32") ~= 0 and "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
     or "make",
   event = "VeryLazy",
-  version = false, 
+  version = false, -- Never set this value to "*"! Never!
   ---@module 'avante'
   ---@type avante.Config
   opts = {
+    auto_suggestions_provider = "copilot",
     instructions_file = "avante.md",
     provider = "openai",
     providers = {
@@ -31,12 +32,15 @@ return {
         },
       },
     },
+    behaviour = {
+      auto_suggestions = false,
+    },
   },
   dependencies = {
     "nvim-lua/plenary.nvim",
     "MunifTanjim/nui.nvim",
     --- The below dependencies are optional,
-    "echasnovski/mini.pick", -- for file_selector provider mini.pick
+    "nvim-mini/mini.pick", -- for file_selector provider mini.pick
     "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
     "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
     "ibhagwan/fzf-lua", -- for file_selector provider fzf

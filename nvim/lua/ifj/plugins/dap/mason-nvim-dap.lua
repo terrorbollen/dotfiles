@@ -17,6 +17,7 @@ return {
     -- online, please don't ask me how to install them :)
     ensure_installed = {
       "js-debug-adapter",
+      "debugpy"
     },
   },
   -- mason-nvim-dap is loaded when nvim-dap loads
