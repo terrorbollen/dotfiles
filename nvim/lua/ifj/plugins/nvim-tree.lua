@@ -30,10 +30,6 @@ return {
       on_attach = on_attach,
       sync_root_with_cwd = true,
       respect_buf_cwd = true,
-      hijack_directories = {
-        enable = false,
-        auto_open = false,
-      },
       view = {
         width = 50,
         relativenumber = true,
@@ -57,6 +53,10 @@ return {
       -- explorer to work well with
       -- window splits
       actions = {
+        change_dir = {
+          enable = true,
+          global = true, -- This is the key setting
+        },
         open_file = {
           window_picker = {
             enable = false,

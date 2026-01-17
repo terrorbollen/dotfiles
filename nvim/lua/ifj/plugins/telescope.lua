@@ -29,7 +29,7 @@ return {
     })
 
 
-    -- Use nvim tree node ass cwd 
+    -- -- Use nvim tree node ass cwd
     require("telescope.builtin").find_files({
       cwd = vim.fn.getcwd(),
     })
