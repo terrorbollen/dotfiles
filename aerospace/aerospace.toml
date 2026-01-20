@@ -89,7 +89,7 @@ alt-d = "exec-and-forget open -a 'Docker Desktop'"
 alt-b = "exec-and-forget open -a 'Calendar'"
 alt-n = "exec-and-forget open -a 'Notes'"
 shift-alt-m = "exec-and-forget open -a 'Messages'"
-alt-m = "exec-and-forget open -a /Applications/Messenger.app"
+alt-m = "exec-and-forget open -a '/Users/isakfriis-jespersen/Applications/Chrome Apps.localized/Messenger.app'"
 
 alt-f = ['fullscreen']
 alt-period = ['''exec-and-forget aerospace layout floating && osascript -e 'tell application "System Events" to key code 120 using {control down, option down, command down}' || aerospace layout tiling''', 'mode main']
