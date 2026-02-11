@@ -1,0 +1,65 @@
+{
+  "title": "Option to Swedish letters",
+  "rules": [
+    {
+      "description": "⌥ + ; → ö",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "semicolon",
+            "modifiers": {
+              "mandatory": ["option"],
+              "optional": ["caps_lock", "shift"]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'tell application \"System Events\" to keystroke \"ö\"'"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "⌥ + ' → ä",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "quote",
+            "modifiers": {
+              "mandatory": ["option"],
+              "optional": ["caps_lock", "shift"]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'tell application \"System Events\" to keystroke \"ä\"'"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "⌥ + [ → å",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "open_bracket",
+            "modifiers": {
+              "mandatory": ["option"],
+              "optional": ["caps_lock", "shift"]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'tell application \"System Events\" to keystroke \"å\"'"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
