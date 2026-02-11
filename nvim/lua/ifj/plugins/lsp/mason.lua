@@ -30,7 +30,7 @@ return {
       -- list of servers for mason to install
       ensure_installed = {
         "intelephense",
-        "ember",
+        -- "ember",
         "ts_ls",
         "gopls",
         "html",

@@ -6,10 +6,10 @@ return {
 
     conform.setup({
       formatters_by_ft = {
-        javascript = { "prettier" },
-        typescript = { "prettier" },
-        javascriptreact = { "prettier" },
-        typescriptreact = { "prettier" },
+        javascript = { "eslint_d", "prettier", stop_after_first = true },
+        typescript = { "eslint_d", "prettier", stop_after_first = true },
+        javascriptreact = { "eslint_d", "prettier", stop_after_first = true },
+        typescriptreact = { "eslint_d", "prettier", stop_after_first = true },
         svelte = { "prettier" },
         vue = { "prettier" },
         css = { "prettier" },
@@ -22,11 +22,11 @@ return {
         lua = { "stylua" },
         python = { "isort", "black" },
       },
-      -- format_on_save = {
-      --   lsp_fallback = false,
-      --   async = false,
-      --   timeout_ms = 1000,
-      -- },
+      format_on_save = {
+        lsp_fallback = false,
+        async = false,
+        timeout_ms = 1000,
+      },
     })
 
     vim.keymap.set({ "n", "v" }, "<leader>mp", function()
