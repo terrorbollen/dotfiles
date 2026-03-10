@@ -4,7 +4,7 @@ return {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     {
       "williamboman/mason-lspconfig.nvim",
-    }
+    },
   },
   config = function()
     -- import mason
@@ -29,6 +29,7 @@ return {
     mason_lspconfig.setup({
       -- list of servers for mason to install
       ensure_installed = {
+        "elixirls",
         "intelephense",
         -- "ember",
         "ts_ls",
@@ -47,16 +48,17 @@ return {
         "docker_compose_language_service",
         "helm_ls",
         "yamlls",
-        "terraformls"
+        "terraformls",
       },
     })
 
     mason_tool_installer.setup({
       ensure_installed = {
         "prettier", -- prettier formatter
-        "stylua",   -- lua formatter
-        "isort",    -- python formatter
-        "black",    -- python formatter
+        "stylua", -- lua formatter
+        "isort", -- python formatter
+        "black", -- python formatter
+        "ruff",
         -- "pylint",
         "eslint_d",
       },
