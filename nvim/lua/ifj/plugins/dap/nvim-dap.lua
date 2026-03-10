@@ -5,11 +5,13 @@ return {
 
   dependencies = {
     "rcarriga/nvim-dap-ui",
+    "mfussenegger/nvim-dap-python",
     {
       "mason-org/mason.nvim",
       opts = function(_, opts)
         opts.ensure_installed = opts.ensure_installed or {}
         table.insert(opts.ensure_installed, "js-debug-adapter")
+        table.insert(opts.ensure_installed, "dap-python")
       end,
     },
     {
@@ -45,6 +47,11 @@ return {
           cb(nativeAdapter)
         end
       end
+    end
+
+    require("dap-python").setup("~/.local/share/nvim/mason/packages/debugpy/venv/bin/python")
+    require("dap-python").resolve_python = function()
+      return vim.fn.getcwd() .. "/.venv/bin/python"
     end
 
     local js_filetypes = { "typescript", "javascript", "typescriptreact", "javascriptreact" }
