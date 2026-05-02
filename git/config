@@ -4,12 +4,20 @@
 	; path = /Users/isakfriis-jespersen/.config/git/config
 [init]
   defaultBranch = main
+[fetch]
+  prune = true
+[pull]
+  rebase = true
+[rebase]
+  autoStash = true
 [push]
   autoSetupRemote = true
 [includeIf "gitdir:~/booli/"]
   path = ~/booli/.gitconfig
 [core]
   pager = delta
+  preloadindex = true
+  fsmonitor = true
 [interactive]
   diffFilter = delta --color-only
 [delta]
@@ -31,3 +39,8 @@
 [rerere]
 	enabled = true
 	autoupdate = true
+[credential]
+	helper = 
+	helper = /usr/local/share/gcm-core/git-credential-manager
+[credential "https://dev.azure.com"]
+	useHttpPath = true

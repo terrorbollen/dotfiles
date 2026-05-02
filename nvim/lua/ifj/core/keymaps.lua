@@ -7,8 +7,8 @@ keymap.set("v", "JK", "<ESC>", { desc = "Exit visual mode with JK" })
 keymap.set("v", "<", "<gv")
 keymap.set("v", ">", ">gv")
 
--- Paste in inser mode
-keymap.set("i", "<C-p>", "<Esc>\"+pa", { desc = "Paste in insert mode" })
+-- Paste in insert mode
+keymap.set("i", "<C-p>", "<C-r>+", { desc = "Paste in insert mode" })
 
 -- Junp down/up center cursor
 

@@ -10,6 +10,8 @@ return {
           async = false,
           timeout_ms = 1000,
         })
+        -- save so linters see updated file on disk → diagnostics refresh
+        vim.cmd("silent! write")
       end,
       mode = { "n", "v" },
       desc = "Format file or range (in visual mode)",
@@ -20,10 +22,10 @@ return {
 
     conform.setup({
       formatters_by_ft = {
-        javascript = { "eslint_d", "prettier" },
-        typescript = { "eslint_d", "prettier" },
-        javascriptreact = { "eslint_d", "prettier" },
-        typescriptreact = { "eslint_d", "prettier" },
+        javascript = { "prettier" },
+        typescript = { "prettier" },
+        javascriptreact = { "prettier" },
+        typescriptreact = { "prettier" },
         svelte = { "prettier" },
         vue = { "prettier" },
         css = { "prettier" },

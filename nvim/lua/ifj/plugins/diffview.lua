@@ -35,7 +35,6 @@ return {
     local function toggle_diffview()
       local lib = require("diffview.lib")
       local view = lib.get_current_view()
-      print(view)
       if view ~= nil then
         vim.cmd("DiffviewClose")
       else

@@ -18,76 +18,6 @@ return {
       "theHamsta/nvim-dap-virtual-text",
     },
   },
-  opts = function()
-    local dap = require("dap")
-    if not dap.adapters["pwa-node"] then
-      require("dap").adapters["pwa-node"] = {
-        type = "server",
-        host = "localhost",
-        port = "${port}",
-        executable = {
-          command = "js-debug-adapter", -- installed by mason
-          -- 💀 Make sure to update this path to point to your installation
-          args = {
-            "${port}",
-          },
-        },
-      }
-    end
-    if not dap.adapters["node"] then
-      dap.adapters["node"] = function(cb, config)
-        if config.type == "node" then
-          config.type = "pwa-node"
-        end
-        local nativeAdapter = dap.adapters["pwa-node"]
-        if type(nativeAdapter) == "function" then
-          nativeAdapter(cb, config)
-        else
-          cb(nativeAdapter)
-        end
-      end
-    end
-
-    require("dap-python").setup("~/.local/share/nvim/mason/packages/debugpy/venv/bin/python")
-    require("dap-python").resolve_python = function()
-      return vim.fn.getcwd() .. "/.venv/bin/python"
-    end
-
-    local js_filetypes = { "typescript", "javascript", "typescriptreact", "javascriptreact" }
-
-    local vscode = require("dap.ext.vscode")
-    vscode.type_to_filetypes["node"] = js_filetypes
-    vscode.type_to_filetypes["pwa-node"] = js_filetypes
-
-    for _, language in ipairs(js_filetypes) do
-      if not dap.configurations[language] then
-        dap.configurations[language] = {
-          {
-            type = "pwa-node",
-            request = "launch",
-            name = "Launch file",
-            program = "${file}",
-            cwd = "${workspaceFolder}",
-          },
-          {
-            type = "pwa-node",
-            request = "attach",
-            name = "Attach",
-            processId = require("dap.utils").pick_process,
-            cwd = "${workspaceFolder}",
-          },
-          {
-            type = "pwa-node",
-            request = "attach",
-            name = "Attach by port (Next router)",
-            address = "127.0.0.1",
-            port = 9230, -- <- matches Next’s fallback inspector port
-            cwd = "${workspaceFolder}",
-          },
-        }
-      end
-    end
-  end,
 
   -- stylua: ignore
   keys = {
@@ -121,20 +51,79 @@ return {
   },
 
   config = function()
-    require("mason-nvim-dap").setup()
+    local dap = require("dap")
+
+    -- JS/TS debug adapter
+    if not dap.adapters["pwa-node"] then
+      dap.adapters["pwa-node"] = {
+        type = "server",
+        host = "localhost",
+        port = "${port}",
+        executable = {
+          command = "js-debug-adapter",
+          args = { "${port}" },
+        },
+      }
+    end
+    if not dap.adapters["node"] then
+      dap.adapters["node"] = function(cb, config)
+        if config.type == "node" then
+          config.type = "pwa-node"
+        end
+        local nativeAdapter = dap.adapters["pwa-node"]
+        if type(nativeAdapter) == "function" then
+          nativeAdapter(cb, config)
+        else
+          cb(nativeAdapter)
+        end
+      end
+    end
+
+    -- Python debug adapter
+    require("dap-python").setup("~/.local/share/nvim/mason/packages/debugpy/venv/bin/python")
+    require("dap-python").resolve_python = function()
+      return vim.fn.getcwd() .. "/.venv/bin/python"
+    end
+
+    -- JS/TS configurations
+    local js_filetypes = { "typescript", "javascript", "typescriptreact", "javascriptreact" }
+
+    local vscode = require("dap.ext.vscode")
+    vscode.type_to_filetypes["node"] = js_filetypes
+    vscode.type_to_filetypes["pwa-node"] = js_filetypes
+
+    for _, language in ipairs(js_filetypes) do
+      if not dap.configurations[language] then
+        dap.configurations[language] = {
+          {
+            type = "pwa-node",
+            request = "launch",
+            name = "Launch file",
+            program = "${file}",
+            cwd = "${workspaceFolder}",
+          },
+          {
+            type = "pwa-node",
+            request = "attach",
+            name = "Attach",
+            processId = require("dap.utils").pick_process,
+            cwd = "${workspaceFolder}",
+          },
+          {
+            type = "pwa-node",
+            request = "attach",
+            name = "Attach by port (Next router)",
+            address = "127.0.0.1",
+            port = 9230,
+            cwd = "${workspaceFolder}",
+          },
+        }
+      end
+    end
 
     vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
 
-    -- for name, sign in pairs(LazyVim.config.icons.dap) do
-    --   sign = type(sign) == "table" and sign or { sign }
-    --   vim.fn.sign_define(
-    --     "Dap" .. name,
-    --     { text = sign[1], texthl = sign[2] or "DiagnosticInfo", linehl = sign[3], numhl = sign[3] }
-    --   )
-    -- end
-
     -- setup dap config by VsCode launch.json file
-    local vscode = require("dap.ext.vscode")
     local json = require("plenary.json")
     vscode.json_decode = function(str)
       return vim.json.decode(json.json_strip_comments(str))

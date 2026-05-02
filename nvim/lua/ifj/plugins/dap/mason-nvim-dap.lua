@@ -19,6 +19,7 @@ return {
     },
   },
   -- mason-nvim-dap is loaded when nvim-dap loads
-  config = function()
+  config = function(_, opts)
+    require("mason-nvim-dap").setup(opts)
   end,
 }

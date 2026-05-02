@@ -3,9 +3,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-source "/opt/homebrew/opt/fzf/shell/completion.zsh"
-source "/opt/homebrew/opt/fzf/shell/key-bindings.zsh"
-
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -54,6 +51,9 @@ zsh-vi-mode
 )
 DISABLE_AUTO_UPDATE=false
 ZVM_SYSTEM_CLIPBOARD_ENABLED=true
+ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
+HISTSIZE=50000
+SAVEHIST=50000
 
 source $ZSH/oh-my-zsh.sh
 
@@ -81,18 +81,11 @@ fi
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
 
-export PATH="/opt/homebrew/opt/php@8.0/bin:$PATH"
-export PATH="/opt/homebrew/opt/php@8.0/sbin:$PATH"
-
-
 alias ls='eza'
 
 # Created by `pipx` on 2025-03-10 12:36:27
 export PATH="$PATH:/Users/isakfriis-jespersen/.local/bin"
 
-ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source <(fzf --zsh)
 
 export FZF_DEFAULT_OPTS='--height 40% --tmux bottom,40% --layout reverse --border top'
@@ -112,3 +105,6 @@ export PATH="/opt/homebrew/opt/node@22/bin:$PATH"
 
 # bun completions
 [ -s "/Users/isakfriis-jespersen/.bun/_bun" ] && source "/Users/isakfriis-jespersen/.bun/_bun"
+
+eval "$(zoxide init zsh)"
+eval "$(atuin init zsh)"

@@ -1,44 +1,29 @@
 return {
   "ThePrimeagen/harpoon",
+  branch = "harpoon2",
+  dependencies = { "nvim-lua/plenary.nvim" },
   keys = {
     { "<leader>hx", desc = "Harpoon add file" },
     { "<leader>hm", desc = "Harpoon open menu" },
     { "<leader>hn", desc = "Harpoon prev" },
     { "<leader>hp", desc = "Harpoon next" },
+    { "<leader>h1", desc = "Harpoon file 1" },
+    { "<leader>h2", desc = "Harpoon file 2" },
+    { "<leader>h3", desc = "Harpoon file 3" },
+    { "<leader>h4", desc = "Harpoon file 4" },
   },
   config = function()
     local harpoon = require("harpoon")
-    harpoon.setup({
-      global_settings = {
-        -- sets the marks upon calling `toggle` on the ui, instead of require `:w`.
-        save_on_toggle = false,
+    harpoon:setup()
 
-        -- saves the harpoon file upon every change. disabling is unrecommended.
-        save_on_change = true,
-
-        -- sets harpoon to run the command immediately as it's passed to the terminal when calling `sendCommand`.
-        enter_on_sendcmd = false,
-
-        -- closes any tmux windows harpoon that harpoon creates when you close Neovim.
-        tmux_autoclose_windows = false,
-
-        -- filetypes that you want to prevent from adding to the harpoon list menu.
-        excluded_filetypes = { "harpoon" },
-
-        -- set marks specific to each git branch inside git repository
-        mark_branch = false,
-
-        -- enable tabline with harpoon marks
-        tabline = false,
-        tabline_prefix = "   ",
-        tabline_suffix = "   ",
-      },
-    })
-
-    local keymap = vim.keymap -- for conciseness
-    keymap.set("n", "<leader>hx", require("harpoon.mark").add_file, { desc = "Harpoon open file" })
-    keymap.set("n", "<leader>hm", require("harpoon.ui").toggle_quick_menu, { desc = "Harpoon open menu" })
-    keymap.set("n", "<leader>hn", require("harpoon.ui").nav_prev, { desc = "Harpoon open file" })
-    keymap.set("n", "<leader>hp", require("harpoon.ui").nav_next, { desc = "Harpoon open file" })
+    local keymap = vim.keymap
+    keymap.set("n", "<leader>hx", function() harpoon:list():add() end, { desc = "Harpoon add file" })
+    keymap.set("n", "<leader>hm", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Harpoon open menu" })
+    keymap.set("n", "<leader>hn", function() harpoon:list():prev() end, { desc = "Harpoon prev" })
+    keymap.set("n", "<leader>hp", function() harpoon:list():next() end, { desc = "Harpoon next" })
+    keymap.set("n", "<leader>h1", function() harpoon:list():select(1) end, { desc = "Harpoon file 1" })
+    keymap.set("n", "<leader>h2", function() harpoon:list():select(2) end, { desc = "Harpoon file 2" })
+    keymap.set("n", "<leader>h3", function() harpoon:list():select(3) end, { desc = "Harpoon file 3" })
+    keymap.set("n", "<leader>h4", function() harpoon:list():select(4) end, { desc = "Harpoon file 4" })
   end,
 }

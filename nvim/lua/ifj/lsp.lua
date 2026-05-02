@@ -5,11 +5,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
       return { buffer = ev.buf, silent = true, desc = desc }
     end
 
+
     vim.keymap.set("n", "gR", function() Snacks.picker.lsp_references() end, opts("Show LSP references"))
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts("Go to declaration"))
     vim.keymap.set("n", "gd", function() Snacks.picker.lsp_definitions() end, opts("Show LSP definitions"))
     vim.keymap.set("n", "gi", function() Snacks.picker.lsp_implementations() end, opts("Show LSP implementations"))
-    vim.keymap.set("n", "gt", function() Snacks.picker.lsp_type_definitions() end, opts("Show LSP type definitions"))
+    vim.keymap.set("n", "<leader>gt", function() Snacks.picker.lsp_type_definitions() end, opts("Show LSP type definitions"))
     vim.keymap.set("n", "<leader>ci", function() Snacks.picker.lsp_incoming_calls() end, opts("Show incoming calls"))
     vim.keymap.set("n", "<leader>co", function() Snacks.picker.lsp_outgoing_calls() end, opts("Show outgoing calls"))
     vim.keymap.set({ "n", "v" }, "<leader>la", vim.lsp.buf.code_action, opts("See available code actions"))
@@ -45,7 +46,17 @@ local severity = vim.diagnostic.severity
 
 vim.diagnostic.config({
   virtual_lines = false,
-  virtual_text = false,
+  virtual_text = {
+    severity = { min = severity.ERROR },
+    prefix = "●",
+    format = function(diagnostic)
+      local msg = diagnostic.message
+      if #msg > 60 then
+        return msg:sub(1, 57) .. "…"
+      end
+      return msg
+    end,
+  },
   underline = true,
   update_in_insert = false,
   severity_sort = true,
@@ -66,3 +77,11 @@ vim.diagnostic.config({
     },
   },
 })
+
+-- muted virtual text: dimmed red fg, no background
+vim.api.nvim_create_autocmd("ColorScheme", {
+  callback = function()
+    vim.api.nvim_set_hl(0, "DiagnosticVirtualTextError", { fg = "#6e3535", italic = true })
+  end,
+})
+vim.api.nvim_set_hl(0, "DiagnosticVirtualTextError", { fg = "#6e3535", italic = true })

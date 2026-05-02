@@ -31,6 +31,11 @@ family = "MesloLGS Nerd Font Mono"
 style = "Regular"
 
 [[keyboard.bindings]]
+key = "Return"
+mods = "Shift"
+chars = "\u001b[13;2u"
+
+[[keyboard.bindings]]
 key = "H"
 mods = "Control|Shift"
 chars = "\u2660" ## ♠
@@ -64,6 +69,9 @@ chars = "\u2666" ## ♦
 key = "K"
 mods = "Control|Alt"
 chars = "\u2667" ## ♧
+
+[window]
+option_as_alt = "Both"
 
 [general]
 import = [

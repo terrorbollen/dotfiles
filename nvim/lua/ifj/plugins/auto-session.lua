@@ -7,7 +7,11 @@ return {
   ---@type AutoSession.Config
   opts = {
     suppressed_dirs = { },
-    auto_restore_last_session = true,
+    -- only auto-restore when nvim opened with a directory arg (not bare `nvim`)
+    -- bare `nvim` shows snacks dashboard instead
+    auto_restore = function()
+      return vim.fn.argc() > 0
+    end,
   },
   config = function(_, opts)
     require('auto-session').setup(opts)
