@@ -55,6 +55,40 @@ return {
     -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {
       default = { "lsp", "path", "buffer" },
+      providers = {
+        lsp = {
+          transform_items = function(_, items)
+            local k = vim.lsp.protocol.CompletionItemKind
+            local priority = {
+              -- Data kinds: moderate boost
+              [k.Field] = 5,
+              [k.Variable] = 5,
+              [k.Property] = 5,
+              [k.Constant] = 4,
+              [k.EnumMember] = 4,
+              [k.Class] = 3,
+              [k.Interface] = 3,
+              [k.Struct] = 3,
+              [k.Module] = 1,
+              -- Callables: penalize so data always wins
+              [k.Method] = -5,
+              [k.Function] = -5,
+              [k.Constructor] = -3,
+            }
+            for _, item in ipairs(items) do
+              local offset = priority[item.kind]
+              if offset then
+                item.score_offset = (item.score_offset or 0) + offset
+              end
+              -- Dunder names are rarely what you want first (__class__, __dict__, etc.)
+              if item.label:sub(1, 2) == "__" then
+                item.score_offset = (item.score_offset or 0) - 5
+              end
+            end
+            return items
+          end,
+        },
+      },
     },
     signature = { enabled = true },
 

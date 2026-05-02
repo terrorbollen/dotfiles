@@ -1,7 +1,6 @@
 vim.g.mapleader = " "
 
 local keymap = vim.keymap -- for conciseness
-
 keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode with jk" })
 keymap.set("v", "JK", "<ESC>", { desc = "Exit visual mode with JK" })
 
@@ -34,8 +33,6 @@ keymap.set("n", "<esc>", ":noh<cr>")
 -- Move selected line / block of text in visual mode
 keymap.set("x", "K", ":move '<-2<CR>gv-gv")
 keymap.set("x", "J", ":move '>+1<CR>gv-gv")
-
-keymap.set("n", "<leader>nh", ":nohl<CR>", { desc = "Clear search highlights" })
 
 -- delete single character:without copying into register
 keymap.set("n", "x", '"_x')

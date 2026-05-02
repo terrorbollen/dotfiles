@@ -1,5 +1,10 @@
 return {
   "sindrets/diffview.nvim",
+  cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewFileHistory" },
+  keys = {
+    { "<leader>dv", desc = "Toggle diffview" },
+    { "<leader>dh", desc = "Toggle file history" },
+  },
   config = function()
     local diffview = require("diffview")
 
@@ -26,10 +31,30 @@ return {
       },
     })
 
-    local keymap = vim.keymap
+    -- Check if any diffview tab is open by looking at the view state
+    local function toggle_diffview()
+      local lib = require("diffview.lib")
+      local view = lib.get_current_view()
+      print(view)
+      if view ~= nil then
+        vim.cmd("DiffviewClose")
+      else
+        vim.cmd("DiffviewOpen")
+      end
+    end
 
-    keymap.set("n", "<leader>dv", "<cmd>DiffviewOpen<CR>", { desc = "Open diffview" }) -- restore last workspace session for current directory
-    keymap.set("n", "<leader>dc", "<cmd>DiffviewClose<CR>", { desc = "Close diffview" })
-    keymap.set("n", "<leader>dh", "<cmd>DiffviewFileHistory %<CR>", { desc = "Open file history" })
+    local function toggle_file_history()
+      local lib = require("diffview.lib")
+      local view = lib.get_current_view()
+      if view ~= nil then
+        vim.cmd("tabclose")
+      else
+        vim.cmd("DiffviewFileHistory %")
+      end
+    end
+
+    local keymap = vim.keymap
+    keymap.set("n", "<leader>dv", toggle_diffview, { desc = "Toggle diffview" })
+    keymap.set("n", "<leader>dh", toggle_file_history, { desc = "Toggle file history" })
   end,
 }

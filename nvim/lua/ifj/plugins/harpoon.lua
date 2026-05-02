@@ -1,5 +1,11 @@
 return {
   "ThePrimeagen/harpoon",
+  keys = {
+    { "<leader>hx", desc = "Harpoon add file" },
+    { "<leader>hm", desc = "Harpoon open menu" },
+    { "<leader>hn", desc = "Harpoon prev" },
+    { "<leader>hp", desc = "Harpoon next" },
+  },
   config = function()
     local harpoon = require("harpoon")
     harpoon.setup({

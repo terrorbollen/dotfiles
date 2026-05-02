@@ -1,5 +1,6 @@
 return {
   "harrisoncramer/gitlab.nvim",
+  cmd = { "GitLab" },
   dependencies = {
     "MunifTanjim/nui.nvim",
     "nvim-lua/plenary.nvim",

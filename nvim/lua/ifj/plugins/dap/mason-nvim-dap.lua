@@ -1,8 +1,6 @@
 return {
-  "williamboman/mason.nvim",
-  "mfussenegger/nvim-dap",
   "jay-babu/mason-nvim-dap.nvim",
-  dependencies = "mason.nvim",
+  dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
   cmd = { "DapInstall", "DapUninstall" },
   opts = {
     -- Makes a best effort to setup the various debuggers with
@@ -21,5 +19,6 @@ return {
     },
   },
   -- mason-nvim-dap is loaded when nvim-dap loads
-  config = function() end,
+  config = function()
+  end,
 }

@@ -9,8 +9,8 @@ return {
     suppressed_dirs = { },
     auto_restore_last_session = true,
   },
-  config = function()
-    require('auto-session').setup({})
+  config = function(_, opts)
+    require('auto-session').setup(opts)
     local keymap = vim.keymap
 
     keymap.set("n", "<leader>wr", "<cmd>AutoSession restore<CR>", { desc = "Restore session for cwd" }) -- restore last workspace session for current directory

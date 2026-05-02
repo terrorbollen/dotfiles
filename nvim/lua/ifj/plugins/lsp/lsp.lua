@@ -1,6 +1,6 @@
 return {
   "neovim/nvim-lspconfig",
-  event = { "BufReadPre", "BufNewFile" },
+  event = { "BufReadPost", "BufNewFile" },
   dependencies = {
     { "antosha417/nvim-lsp-file-operations", config = true },
     { "folke/lazydev.nvim", opts = {} },

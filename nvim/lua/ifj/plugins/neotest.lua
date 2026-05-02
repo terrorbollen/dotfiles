@@ -27,11 +27,19 @@ return {
 
     keymap.set("n", "<leader>nt", function()
       neotest.output_panel.toggle()
-    end, { desc = "Neotest toggle" })
+    end, { desc = "Neotest toggle output panel" })
 
-    keymap.set("n", "<leader>nr", function()
+    keymap.set("n", "<leader>nn", function()
+      neotest.run.run()
+    end, { desc = "Neotest run nearest" })
+
+    keymap.set("n", "<leader>nf", function()
       neotest.run.run(vim.fn.expand("%"))
-    end, { desc = "Neotest run" })
+    end, { desc = "Neotest run file" })
+
+    keymap.set("n", "<leader>nd", function()
+      neotest.run.run({ strategy = "dap" })
+    end, { desc = "Neotest debug nearest" })
 
     -- keymap.set("n", "<leader>ns", function()
     --   neotest.run.stop()

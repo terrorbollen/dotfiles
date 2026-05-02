@@ -1,4 +1,6 @@
-vim.cmd("let g:netrw_liststyle = 3")
+-- disable netrw (nvim-tree replaces it)
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
 local opt = vim.opt
 
@@ -18,6 +20,8 @@ opt.ignorecase = true -- ignore case when searching
 opt.smartcase = true -- if you include mixed case in your search, assumes you want case-sensitive
 
 opt.cursorline = true
+opt.scrolloff = 8
+opt.updatetime = 250
 
 -- turn on termguicolors for tokyonight colorscheme to work
 -- (have to use iterm2 or any other true color terminal)
@@ -37,3 +41,6 @@ opt.splitbelow = true -- split horizontal window to the bottom
 
 -- turn off swapfile
 opt.swapfile = false
+
+-- persistent undo (needed for undotree across sessions)
+opt.undofile = true
