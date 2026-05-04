@@ -21,11 +21,12 @@ return {
     local conform = require("conform")
 
     conform.setup({
+      timeout_ms = 1000,
       formatters_by_ft = {
-        javascript = { "prettier" },
-        typescript = { "prettier" },
-        javascriptreact = { "prettier" },
-        typescriptreact = { "prettier" },
+        javascript = { "eslint_d", "prettier" },
+        typescript = { "eslint_d", "prettier" },
+        javascriptreact = { "eslint_d", "prettier" },
+        typescriptreact = { "eslint_d", "prettier" },
         svelte = { "prettier" },
         vue = { "prettier" },
         css = { "prettier" },

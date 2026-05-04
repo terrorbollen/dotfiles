@@ -86,7 +86,16 @@ alias ls='eza'
 # Created by `pipx` on 2025-03-10 12:36:27
 export PATH="$PATH:/Users/isakfriis-jespersen/.local/bin"
 
-source <(fzf --zsh)
+# cached shell-init: regenerate via `zcache-rebuild` after upgrades
+zcache-rebuild() {
+  mkdir -p ~/.cache/zsh
+  fzf --zsh        > ~/.cache/zsh/fzf.zsh
+  zoxide init zsh  > ~/.cache/zsh/zoxide.zsh
+  atuin init zsh   > ~/.cache/zsh/atuin.zsh
+  echo "zsh init caches rebuilt"
+}
+[[ -f ~/.cache/zsh/fzf.zsh ]] || fzf --zsh > ~/.cache/zsh/fzf.zsh
+source ~/.cache/zsh/fzf.zsh
 
 export FZF_DEFAULT_OPTS='--height 40% --tmux bottom,40% --layout reverse --border top'
 export FZF_CTRL_R_OPTS="
@@ -106,5 +115,7 @@ export PATH="/opt/homebrew/opt/node@22/bin:$PATH"
 # bun completions
 [ -s "/Users/isakfriis-jespersen/.bun/_bun" ] && source "/Users/isakfriis-jespersen/.bun/_bun"
 
-eval "$(zoxide init zsh)"
-eval "$(atuin init zsh)"
+[[ -f ~/.cache/zsh/zoxide.zsh ]] || zoxide init zsh > ~/.cache/zsh/zoxide.zsh
+source ~/.cache/zsh/zoxide.zsh
+[[ -f ~/.cache/zsh/atuin.zsh ]] || atuin init zsh > ~/.cache/zsh/atuin.zsh
+source ~/.cache/zsh/atuin.zsh

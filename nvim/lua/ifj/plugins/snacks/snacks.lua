@@ -6,7 +6,7 @@ return {
   opts = {
     bigfile = { enabled = true },
     dashboard = {
-      enabled = true,
+      enabled = false,
       preset = {
         keys = {
           { icon = " ", key = "e", desc = "New File", action = ":ene" },
@@ -27,12 +27,13 @@ return {
     },
     explorer = { enabled = false },
     indent = { enabled = true },
-    input = { enabled = false },
+    input = { enabled = true },
     picker = {
       enabled = true,
       sources = {
         files = {
           hidden = true,
+          ignored = false,
         },
       },
       win = {
@@ -80,6 +81,13 @@ return {
         "node_modules/",
         "__pycache__/",
         "%.pyc",
+        "dist/",
+        "build/",
+        "target/",
+        "coverage/",
+        "%.terraform/",
+        "vendor/",
+        "%.DS_Store",
       },
     },
     notifier = { enabled = false },

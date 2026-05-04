@@ -1,13 +1,13 @@
 return {
   "jake-stewart/multicursor.nvim",
   branch = "1.0",
-  keys = {
-    { "<C-N>", mode = { "n", "x" }, desc = "Add cursor by match" },
-    { "<C-n>", mode = { "n", "x" }, desc = "Add cursor by match" },
-    { "<C-s>", mode = { "n", "x" }, desc = "Skip cursor by match" },
-    { "<c-leftmouse>", desc = "Add cursor with click" },
-    { "<c-q>", mode = { "n", "x" }, desc = "Toggle cursor" },
-  },
+  -- keys = {
+  --   { "<C-N>", mode = { "n", "x" }, desc = "Add cursor by match" },
+  --   { "<C-n>", mode = { "n", "x" }, desc = "Add cursor by match" },
+  --   { "<C-s>", mode = { "n", "x" }, desc = "Skip cursor by match" },
+  --   { "<c-leftmouse>", desc = "Add cursor with click" },
+  --   { "<c-q>", mode = { "n", "x" }, desc = "Toggle cursor" },
+  -- },
   config = function()
     local mc = require("multicursor-nvim")
     mc.setup()
