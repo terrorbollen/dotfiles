@@ -55,7 +55,7 @@ keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer
 
 keymap.set("n", "<leader>qr", ":cgetexpr getqflist()<CR>", { noremap = true, silent = true })
 
-keymap.set("n", "p", "p==")
+keymap.set("n", "p", "p`[=`]")
 
 -- Cycle through quickfix list items
 vim.keymap.set('n', '“', '<Cmd>try | cnext | catch | cfirst | catch | endtry<CR>')

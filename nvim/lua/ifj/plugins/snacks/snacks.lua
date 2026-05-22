@@ -28,6 +28,7 @@ return {
     explorer = { enabled = false },
     indent = { enabled = true },
     input = { enabled = true },
+    image = { enabled = true },
     picker = {
       enabled = true,
       sources = {
@@ -40,11 +41,11 @@ return {
         input = {
           keys = {
             ["<C-k>"] = { "list_up", mode = { "i", "n" } },
-            ["<C-j>"] = { "list_down", mode = { "i", "n" } },
             ["<C-q>"] = { "qflist", mode = { "i", "n" } },
             ["<C-t>"] = { "trouble_open", mode = { "i", "n" } },
             ["<C-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
             ["<C-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
+            ["<C-h>"] = { "edit_split", mode = { "i", "n" } },
           },
         },
         list = {

@@ -54,6 +54,11 @@ ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
 HISTSIZE=50000
 SAVEHIST=50000
 
+# zsh-syntax-highlighting must load AFTER zsh-vi-mode finishes wrapping widgets.
+# Append BEFORE sourcing oh-my-zsh because ZVM_INIT_MODE=sourcing fires
+# zvm_after_init_commands synchronously while the plugin is sourced.
+zvm_after_init_commands+=('source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh')
+
 source $ZSH/oh-my-zsh.sh
 
 bindkey '^ ' autosuggest-accept
@@ -119,6 +124,3 @@ export FZF_CTRL_R_OPTS="
 source ~/.cache/zsh/zoxide.zsh
 [[ -f ~/.cache/zsh/atuin.zsh ]] || atuin init zsh > ~/.cache/zsh/atuin.zsh
 source ~/.cache/zsh/atuin.zsh
-
-# zsh-syntax-highlighting must load AFTER zsh-vi-mode finishes wrapping widgets
-zvm_after_init_commands+=('source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh')
