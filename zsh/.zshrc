@@ -45,11 +45,10 @@ plugins=(
 git
 docker
 zsh-autosuggestions
-zsh-syntax-highlighting
-kubectl
 zsh-vi-mode
 )
 DISABLE_AUTO_UPDATE=false
+ZVM_INIT_MODE=sourcing
 ZVM_SYSTEM_CLIPBOARD_ENABLED=true
 ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
 HISTSIZE=50000
@@ -89,13 +88,16 @@ export PATH="$PATH:/Users/isakfriis-jespersen/.local/bin"
 # cached shell-init: regenerate via `zcache-rebuild` after upgrades
 zcache-rebuild() {
   mkdir -p ~/.cache/zsh
-  fzf --zsh        > ~/.cache/zsh/fzf.zsh
-  zoxide init zsh  > ~/.cache/zsh/zoxide.zsh
-  atuin init zsh   > ~/.cache/zsh/atuin.zsh
+  fzf --zsh             > ~/.cache/zsh/fzf.zsh
+  zoxide init zsh       > ~/.cache/zsh/zoxide.zsh
+  atuin init zsh        > ~/.cache/zsh/atuin.zsh
+  kubectl completion zsh > ~/.cache/zsh/kubectl.zsh
   echo "zsh init caches rebuilt"
 }
 [[ -f ~/.cache/zsh/fzf.zsh ]] || fzf --zsh > ~/.cache/zsh/fzf.zsh
 source ~/.cache/zsh/fzf.zsh
+[[ -f ~/.cache/zsh/kubectl.zsh ]] || kubectl completion zsh > ~/.cache/zsh/kubectl.zsh
+source ~/.cache/zsh/kubectl.zsh
 
 export FZF_DEFAULT_OPTS='--height 40% --tmux bottom,40% --layout reverse --border top'
 export FZF_CTRL_R_OPTS="
@@ -106,8 +108,6 @@ export FZF_CTRL_R_OPTS="
   --header 'Press CTRL-Y to copy command into clipboard'"
 
 
-export PATH="/opt/homebrew/opt/node@22/bin:$PATH"
-#
 # export NVM_DIR="$HOME/.nvm"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -119,3 +119,6 @@ export PATH="/opt/homebrew/opt/node@22/bin:$PATH"
 source ~/.cache/zsh/zoxide.zsh
 [[ -f ~/.cache/zsh/atuin.zsh ]] || atuin init zsh > ~/.cache/zsh/atuin.zsh
 source ~/.cache/zsh/atuin.zsh
+
+# zsh-syntax-highlighting must load AFTER zsh-vi-mode finishes wrapping widgets
+zvm_after_init_commands+=('source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh')

@@ -13,8 +13,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({ { import = "ifj.plugins" }, { import = "ifj.plugins.lsp" }, { import = "ifj.plugins.snacks" }, { import = "ifj.plugins.dap" } }, {
   checker = {
-    enabled = true,
-    notify = false,
+    enabled = false,
   },
   change_detection = {
     notify = false,
