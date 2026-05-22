@@ -21,7 +21,7 @@ return {
     local conform = require("conform")
 
     conform.setup({
-      timeout_ms = 1000,
+      timeout_ms = 2000,
       formatters_by_ft = {
         javascript = { "eslint_d", "prettier" },
         typescript = { "eslint_d", "prettier" },
@@ -45,6 +45,5 @@ return {
       --   timeout_ms = 1000,
       -- },
     })
-
   end,
 }

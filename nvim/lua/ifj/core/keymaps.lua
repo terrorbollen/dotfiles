@@ -1,6 +1,6 @@
 vim.g.mapleader = " "
-
 local keymap = vim.keymap -- for conciseness
+
 keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode with jk" })
 keymap.set("v", "JK", "<ESC>", { desc = "Exit visual mode with JK" })
 
@@ -54,6 +54,8 @@ keymap.set("n", "<leader>tp", "<cmd>tabp<CR>", { desc = "Go to previous tab" }) 
 keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer in new tab" }) --  move current buffer to new tab
 
 keymap.set("n", "<leader>qr", ":cgetexpr getqflist()<CR>", { noremap = true, silent = true })
+
+keymap.set("n", "p", "p==")
 
 -- Cycle through quickfix list items
 vim.keymap.set('n', '“', '<Cmd>try | cnext | catch | cfirst | catch | endtry<CR>')

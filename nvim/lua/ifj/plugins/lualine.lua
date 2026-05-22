@@ -74,6 +74,31 @@ return {
         lualine_y = { "progress" },
         lualine_z = { "location" },
       },
+      tabline = {
+        lualine_a = {
+          {
+            "tabs",
+            mode = 1,
+            use_mode_colors = false,
+            fmt = function(name, context)
+              local buflist = vim.fn.tabpagebuflist(context.tabnr)
+              local winnr = vim.fn.tabpagewinnr(context.tabnr)
+              local bufnr = buflist[winnr]
+              local bufname = vim.api.nvim_buf_get_name(bufnr)
+              if bufname == "" then
+                return "[No Name]"
+              end
+              local parent = vim.fn.fnamemodify(bufname, ":h:t")
+              local file = vim.fn.fnamemodify(bufname, ":t")
+              return parent .. "/" .. file
+            end,
+            tabs_color = {
+              active = "lualine_b_normal",
+              inactive = "lualine_b_inactive",
+            },
+          },
+        },
+      },
     })
   end,
 }

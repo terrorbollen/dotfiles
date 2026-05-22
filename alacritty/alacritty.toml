@@ -70,8 +70,8 @@ key = "K"
 mods = "Control|Alt"
 chars = "\u2667" ## ♧
 
-[window]
-option_as_alt = "Both"
+# [window]
+# option_as_alt = "Both"
 
 [general]
 import = [
