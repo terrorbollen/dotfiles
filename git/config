@@ -14,10 +14,22 @@
   autoSetupRemote = true
 [includeIf "gitdir:~/booli/"]
   path = ~/booli/.gitconfig
+[includeIf "gitdir:~/innspire/"]
+  path = ~/innspire/.gitconfig
 [core]
   pager = delta
   preloadindex = true
   fsmonitor = true
+  untrackedCache = true
+  commitGraph = true
+[gc]
+  writeCommitGraph = true
+[fetch]
+  writeCommitGraph = true
+[pack]
+  useBitmaps = true
+[feature]
+  manyFiles = true
 [interactive]
   diffFilter = delta --color-only
 [delta]
