@@ -69,6 +69,11 @@ return {
       update_focused_file = {
         enable = true,
         update_root = true,
+        -- don't follow/jump-root to snacks scratch buffers (~/.local/share/nvim/scratch)
+        exclude = function(event)
+          local scratch = vim.fs.normalize(vim.fn.stdpath("data") .. "/scratch")
+          return vim.startswith(vim.fs.normalize(event.file or ""), scratch)
+        end,
       },
       filters = {
         custom = { ".DS_Store", "__pycache__" },
