@@ -46,18 +46,16 @@ git
 docker
 zsh-autosuggestions
 zsh-vi-mode
+zsh-syntax-highlighting
 )
 DISABLE_AUTO_UPDATE=false
 ZVM_INIT_MODE=sourcing
 ZVM_SYSTEM_CLIPBOARD_ENABLED=true
 ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
-HISTSIZE=50000
-SAVEHIST=50000
+HISTSIZE=100000
+HISTFILESIZE=100000
 
-# zsh-syntax-highlighting must load AFTER zsh-vi-mode finishes wrapping widgets.
-# Append BEFORE sourcing oh-my-zsh because ZVM_INIT_MODE=sourcing fires
-# zvm_after_init_commands synchronously while the plugin is sourced.
-zvm_after_init_commands+=('source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh')
+eval "$(mise activate zsh)"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -87,6 +85,11 @@ fi
 
 alias ls='eza'
 
+alias compose='docker compose'
+alias k=kubectl
+alias vi=nvim . 
+
+
 # Created by `pipx` on 2025-03-10 12:36:27
 export PATH="$PATH:/Users/isakfriis-jespersen/.local/bin"
 
@@ -95,7 +98,6 @@ zcache-rebuild() {
   mkdir -p ~/.cache/zsh
   fzf --zsh             > ~/.cache/zsh/fzf.zsh
   zoxide init zsh       > ~/.cache/zsh/zoxide.zsh
-  atuin init zsh        > ~/.cache/zsh/atuin.zsh
   kubectl completion zsh > ~/.cache/zsh/kubectl.zsh
   echo "zsh init caches rebuilt"
 }
@@ -122,5 +124,3 @@ export FZF_CTRL_R_OPTS="
 
 [[ -f ~/.cache/zsh/zoxide.zsh ]] || zoxide init zsh > ~/.cache/zsh/zoxide.zsh
 source ~/.cache/zsh/zoxide.zsh
-[[ -f ~/.cache/zsh/atuin.zsh ]] || atuin init zsh > ~/.cache/zsh/atuin.zsh
-source ~/.cache/zsh/atuin.zsh
