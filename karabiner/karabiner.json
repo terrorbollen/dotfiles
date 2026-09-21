@@ -1,112 +1,169 @@
 {
-    "profiles": [
-        {
-            "complex_modifications": {
-                "rules": [
-                    {
-                        "description": "US layout → Swedish letters (Option dead keys)",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "quote",
-                                    "modifiers": { "mandatory": ["option"] }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "u",
-                                        "modifiers": ["option"]
-                                    },
-                                    { "key_code": "a" }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
-                                    "key_code": "quote",
-                                    "modifiers": { "mandatory": ["option", "shift"] }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "u",
-                                        "modifiers": ["option"]
-                                    },
-                                    {
-                                        "key_code": "a",
-                                        "modifiers": ["shift"]
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
-                                    "key_code": "semicolon",
-                                    "modifiers": { "mandatory": ["option"] }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "u",
-                                        "modifiers": ["option"]
-                                    },
-                                    { "key_code": "o" }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
-                                    "key_code": "semicolon",
-                                    "modifiers": { "mandatory": ["option", "shift"] }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "u",
-                                        "modifiers": ["option"]
-                                    },
-                                    {
-                                        "key_code": "o",
-                                        "modifiers": ["shift"]
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
-                                    "key_code": "open_bracket",
-                                    "modifiers": { "mandatory": ["option"] }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "a",
-                                        "modifiers": ["option"]
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
-                                    "key_code": "open_bracket",
-                                    "modifiers": { "mandatory": ["option", "shift"] }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "a",
-                                        "modifiers": ["option", "shift"]
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    }
+  "profiles": [
+    {
+      "complex_modifications": {
+        "rules": [
+          {
+            "description": "Mouse click enters ovim insert mode",
+            "manipulators": [
+              {
+                "conditions": [
+                  {
+                    "bundle_identifiers": [
+                      "^com\\.apple\\.Terminal$",
+                      "^com\\.googlecode\\.iterm2$"
+                    ],
+                    "type": "frontmost_application_unless"
+                  }
+                ],
+                "type": "basic",
+                "from": { "any": "pointing_button" },
+                "to": [
+                  { "shell_command": "/Applications/ovim.app/Contents/MacOS/ovim insert" },
+                  { "pointing_button": "button1" }
                 ]
-            },
-            "name": "Default profile",
-            "selected": true,
-            "simple_modifications": [
-                {
-                    "from": { "key_code": "caps_lock" },
-                    "to": [{ "key_code": "left_control" }]
+              }
+            ]
+          },
+          {
+            "description": "jk enters ovim normal mode",
+            "manipulators": [
+              {
+                "type": "basic",
+                "conditions": [
+                  {
+                    "type": "frontmost_application_unless",
+                    "bundle_identifiers": [
+                      "^org\\.alacritty$",
+                      "^net\\.kovidgoyal\\.kitty$",
+                      "^md\\.obsidian$"
+                    ]
+                  }
+                ],
+                "from": {
+                  "simultaneous": [
+                    { "key_code": "j" },
+                    { "key_code": "k" }
+                  ],
+                  "simultaneous_options": {
+                    "detect_key_down_uninterruptedly": true,
+                    "key_down_order": "strict",
+                    "key_up_order": "insensitive"
+                  },
+                  "modifiers": { "optional": ["any"] }
+                },
+                "to": [{ "shell_command": "/Applications/ovim.app/Contents/MacOS/ovim normal" }],
+                "parameters": {
+                  "basic.simultaneous_threshold_milliseconds": 300
                 }
-            ],
-            "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }
+              }
+            ]
+          },
+          {
+            "description": "US layout → Swedish letters (Option dead keys)",
+            "manipulators": [
+              {
+                "from": {
+                  "key_code": "quote",
+                  "modifiers": { "mandatory": ["option"] }
+                },
+                "to": [
+                  {
+                    "key_code": "u",
+                    "modifiers": ["option"]
+                  },
+                  { "key_code": "a" }
+                ],
+                "type": "basic"
+              },
+              {
+                "from": {
+                  "key_code": "quote",
+                  "modifiers": { "mandatory": ["option", "shift"] }
+                },
+                "to": [
+                  {
+                    "key_code": "u",
+                    "modifiers": ["option"]
+                  },
+                  {
+                    "key_code": "a",
+                    "modifiers": ["shift"]
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "from": {
+                  "key_code": "semicolon",
+                  "modifiers": { "mandatory": ["option"] }
+                },
+                "to": [
+                  {
+                    "key_code": "u",
+                    "modifiers": ["option"]
+                  },
+                  { "key_code": "o" }
+                ],
+                "type": "basic"
+              },
+              {
+                "from": {
+                  "key_code": "semicolon",
+                  "modifiers": { "mandatory": ["option", "shift"] }
+                },
+                "to": [
+                  {
+                    "key_code": "u",
+                    "modifiers": ["option"]
+                  },
+                  {
+                    "key_code": "o",
+                    "modifiers": ["shift"]
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "from": {
+                  "key_code": "open_bracket",
+                  "modifiers": { "mandatory": ["option"] }
+                },
+                "to": [
+                  {
+                    "key_code": "a",
+                    "modifiers": ["option"]
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "from": {
+                  "key_code": "open_bracket",
+                  "modifiers": { "mandatory": ["option", "shift"] }
+                },
+                "to": [
+                  {
+                    "key_code": "a",
+                    "modifiers": ["option", "shift"]
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          }
+        ]
+      },
+      "name": "Default profile",
+      "selected": true,
+      "simple_modifications": [
+        {
+          "from": { "key_code": "caps_lock" },
+          "to": [{ "key_code": "left_control" }]
         }
-    ]
+      ],
+      "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }
+    }
+  ]
 }
+
