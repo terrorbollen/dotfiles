@@ -58,8 +58,8 @@ keymap.set("n", "<leader>qr", ":cgetexpr getqflist()<CR>", { noremap = true, sil
 keymap.set("n", "p", "p`[=`]")
 
 -- Cycle through quickfix list items
-vim.keymap.set('n', '“', '<Cmd>try | cnext | catch | cfirst | catch | endtry<CR>')
-vim.keymap.set('n', '‘', '<Cmd>try | cprevious | catch | clast | catch | endtry<CR>')
+vim.keymap.set('n', '<leader>qj', '<Cmd>try | cnext | catch | cfirst | catch | endtry<CR>', { desc = "Quickfix: next item" })
+vim.keymap.set('n', '<leader>qk', '<Cmd>try | cprevious | catch | clast | catch | endtry<CR>', { desc = "Quickfix: prev item" })
 
 vim.api.nvim_create_user_command("CloseBuffers", "%bd | e#", {
   desc = "Close all buffers",
