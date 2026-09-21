@@ -20,18 +20,31 @@ return {
   config = function()
     local conform = require("conform")
 
+    local function has_biome(ctx)
+      return vim.fs.find({ "biome.json", "biome.jsonc" }, { upward = true, path = ctx.dirname })[1] ~= nil
+    end
+
+    local function js_formatters(bufnr)
+      local dirname = vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr))
+      if has_biome({ dirname = dirname }) then
+        return { "biome-check" }
+      end
+      return { "prettier" }
+    end
+
     conform.setup({
       timeout_ms = 2000,
       formatters_by_ft = {
-        javascript = { "eslint_d", "prettier" },
-        typescript = { "eslint_d", "prettier" },
-        javascriptreact = { "eslint_d", "prettier" },
-        typescriptreact = { "eslint_d", "prettier" },
+        javascript = js_formatters,
+        typescript = js_formatters,
+        javascriptreact = js_formatters,
+        typescriptreact = js_formatters,
         svelte = { "prettier" },
         vue = { "prettier" },
         css = { "prettier" },
         html = { "prettier" },
-        json = { "prettier" },
+        json = js_formatters,
+        jsonc = js_formatters,
         yaml = { "prettier" },
         markdown = { "prettier" },
         graphql = { "prettier" },

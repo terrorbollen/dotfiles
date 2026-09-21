@@ -49,15 +49,16 @@ return {
         "helm_ls",
         "yamlls",
         "terraformls",
+        "biome",
+        "eslint",
       },
     })
 
     mason_tool_installer.setup({
       ensure_installed = {
-        "prettier", -- prettier formatter
-        "stylua", -- lua formatter
+        "prettier",
+        "stylua",
         "ruff",
-        "eslint_d",
       },
     })
   end,

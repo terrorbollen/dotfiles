@@ -1,4 +1,4 @@
 ---@type vim.lsp.Config
 return {
-  filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
+  filetypes = { "javascript", "typescript", "typescriptreact", "javascriptreact", "svelte", "vue", "astro" },
 }

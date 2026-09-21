@@ -2,9 +2,11 @@
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+vim.opt.mouse = "a"
+
 local opt = vim.opt
 
-opt.relativenumber = true
+opt.relativenumber = false
 opt.number = true
 
 -- tabs & indentation
