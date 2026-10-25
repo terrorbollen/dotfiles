@@ -1,0 +1,164 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Ported from the p10k "lean" ascii config: two lines, dir + git on top,
+# a vi-mode aware prompt char below, status/duration/jobs/versions on the right.
+add_newline = false
+
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_state\
+$git_status\
+$line_break\
+$character"""
+
+right_format = """
+$status\
+$cmd_duration\
+$jobs\
+$direnv\
+$python\
+$conda\
+$nodejs\
+$bun\
+$deno\
+$golang\
+$rust\
+$java\
+$lua\
+$terraform\
+$docker_context\
+$kubernetes\
+$aws\
+$gcloud\
+$azure"""
+
+[character]
+success_symbol = '[>](bold green)'
+error_symbol = '[>](bold red)'
+vimcmd_symbol = '[<](bold green)'
+vimcmd_visual_symbol = '[V](bold yellow)'
+vimcmd_replace_symbol = '[^](bold purple)'
+vimcmd_replace_one_symbol = '[^](bold purple)'
+
+# Only shown over SSH (or as root)
+[username]
+format = '[$user]($style)@'
+
+[hostname]
+format = '[$hostname]($style) '
+style = 'bold yellow'
+
+[directory]
+style = 'bold blue'
+truncation_length = 4
+truncate_to_repo = false
+read_only = ' ro'
+
+[git_branch]
+symbol = ''
+format = '[$branch]($style)'
+style = 'green'
+
+[git_status]
+format = '( [$all_status$ahead_behind]($style))'
+style = 'yellow'
+ahead = '>${count}'
+behind = '<${count}'
+diverged = '<${behind_count}>${ahead_count}'
+stashed = '*'
+modified = '!'
+staged = '+'
+untracked = '?'
+deleted = 'x'
+renamed = 'r'
+conflicted = '~'
+
+[git_state]
+format = ' [$state( $progress_current/$progress_total)]($style)'
+
+[status]
+disabled = false
+format = '[$symbol$status]($style) '
+symbol = 'x'
+success_symbol = ''
+
+[cmd_duration]
+min_time = 3_000
+format = '[$duration]($style) '
+style = 'yellow'
+
+[jobs]
+symbol = '%'
+format = '[$symbol$number]($style) '
+
+[direnv]
+disabled = false
+format = '[$loaded]($style) '
+
+# Language/version segments: plain text, no nerd-font glyphs.
+[python]
+format = '[py $version( \($virtualenv\))]($style) '
+
+[conda]
+format = '[conda $environment]($style) '
+
+[nodejs]
+format = '[node $version]($style) '
+
+[bun]
+format = '[bun $version]($style) '
+
+[deno]
+format = '[deno $version]($style) '
+
+[golang]
+format = '[go $version]($style) '
+
+[rust]
+format = '[rs $version]($style) '
+
+[java]
+format = '[java $version]($style) '
+
+[lua]
+format = '[lua $version]($style) '
+
+[terraform]
+format = '[tf $workspace]($style) '
+
+# Only in dirs with a Dockerfile/compose file, and not on the default context
+[docker_context]
+format = '[docker $context]($style) '
+
+# p10k only showed these while typing matching commands; starship can't,
+# so they stay off (aws is handled above). Flip `disabled = false` to show them always.
+[kubernetes]
+disabled = true
+format = '[k8s $context( \($namespace\))]($style) '
+
+# Hidden until AWS_PROFILE / AWS_ACCESS_KEY_ID etc. are set (there's no default profile).
+# $duration is the time left on temporary creds when AWS_SESSION_EXPIRATION is known.
+[aws]
+format = '[aws( $profile)( \($region\))( \[$duration\])]($style) '
+style = 'bold yellow'
+expiration_symbol = 'EXPIRED'
+
+[aws.profile_aliases]
+innspire-digital-app-dev = 'innspire-dev'
+innspire-digital-app-dev-terraform-operator = 'innspire-dev-tf'
+innspire-digital-app-staging = 'innspire-staging'
+
+[aws.region_aliases]
+eu-north-1 = 'eu-n1'
+us-east-1 = 'us-e1'
+
+[gcloud]
+disabled = true
+format = '[gcp $account(@$domain)( \($project\))]($style) '
+
+[azure]
+disabled = true
+format = '[az $subscription]($style) '

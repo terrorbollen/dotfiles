@@ -1,72 +1,44 @@
 
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.config/zsh/.oh-my-zsh"
+BREW_PREFIX=/opt/homebrew
 
-ZSH_THEME="powerlevel10k/powerlevel10k"
-
-# Uncomment one of the following lines to change the auto-update behavior
-zstyle ':omz:update' mode reminder  # just remind me to update when it's time
-
-# Uncomment the following line to change how often to auto-update (in days).
-zstyle ':omz:update' frequency 13
-
-# Uncomment the following line if pasting URLs and other text is messed up.
-DISABLE_MAGIC_FUNCTIONS="true"
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-HIST_STAMPS="yyyy-mm-dd"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-plugins=(
-git
-docker
-zsh-autosuggestions
-zsh-vi-mode
-zsh-syntax-highlighting
-)
-DISABLE_AUTO_UPDATE=false
-ZVM_INIT_MODE=sourcing
-ZVM_SYSTEM_CLIPBOARD_ENABLED=true
-ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
+# History
+HISTFILE="$ZDOTDIR/.zsh_history"
 HISTSIZE=100000
-HISTFILESIZE=100000
+SAVEHIST=100000
+setopt extended_history hist_expire_dups_first hist_ignore_dups hist_ignore_space hist_verify share_history
+alias history='fc -il 1'
+
+# Directories
+setopt auto_cd auto_pushd pushd_ignore_dups pushd_minus
+
+# Misc
+setopt interactive_comments long_list_jobs no_flow_control
+
+# Completion
+setopt always_to_end complete_in_word
+fpath=("$BREW_PREFIX/share/zsh/site-functions" $fpath)
+autoload -Uz compinit
+compinit -d "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump"
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' special-dirs true
+zstyle ':completion:*' use-cache yes
+zstyle ':completion:*' cache-path "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompcache"
 
 eval "$(mise activate zsh)"
 
-source $ZSH/oh-my-zsh.sh
+# Plugins (brew install zsh-autosuggestions zsh-vi-mode zsh-syntax-highlighting)
+ZVM_INIT_MODE=sourcing
+ZVM_SYSTEM_CLIPBOARD_ENABLED=true
+ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
+source "$BREW_PREFIX/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
+source "$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 bindkey '^ ' autosuggest-accept
-
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
@@ -75,13 +47,8 @@ else
   export EDITOR='nvim'
 fi
 
-
-# Example aliases
-# alias zshconfig="mate ~/.config/zsh/.zshrc"
-# alias ohmyzsh="mate ~/.config/zsh/.oh-my-zsh"
-
-# To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
-[[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
+# Prompt: edit ~/.config/starship.toml
+eval "$(starship init zsh)"
 
 alias ls='eza'
 
@@ -114,13 +81,11 @@ export FZF_CTRL_R_OPTS="
   --color header:italic \
   --header 'Press CTRL-Y to copy command into clipboard'"
 
-
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 # bun completions
 [ -s "/Users/isakfriis-jespersen/.bun/_bun" ] && source "/Users/isakfriis-jespersen/.bun/_bun"
 
 [[ -f ~/.cache/zsh/zoxide.zsh ]] || zoxide init zsh > ~/.cache/zsh/zoxide.zsh
 source ~/.cache/zsh/zoxide.zsh
+
+# Must be sourced after all other widgets are defined
+source "$BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
