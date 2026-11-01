@@ -4,14 +4,17 @@ return {
   event = "VeryLazy",
   opts = {
     keymaps = {
-      add     = { "<leader>arr", desc = "Review: add comment" },
-      edit    = { "<leader>are", desc = "Review: edit comment" },
-      delete  = { "<leader>ard", desc = "Review: delete comment" },
+      add     = { "<leader>ara", desc = "Review: add comment" },
+      reply   = { "<leader>arr", desc = "Review: reply to thread" },
+      edit    = { "<leader>are", desc = "Review: edit last message" },
+      resolve = { "<leader>aro", desc = "Review: resolve thread" },
+      delete  = { "<leader>ard", desc = "Review: delete thread" },
       list    = { "<leader>arl", desc = "Review: list comments" },
-      next    = { "]n",          desc = "Review: next comment" },
-      prev    = { "[n",          desc = "Review: prev comment" },
+      next    = { "<leader>arn", desc = "Review: next comment" },
+      prev    = { "<leader>arb", desc = "Review: prev comment" },
       export  = { "<leader>arx", desc = "Review: copy markdown to clipboard" },
       preview = { "<leader>arp", desc = "Review: preview markdown in split" },
+      send    = { "<leader>ars", desc = "Review: send open threads to clipboard" },
       clear   = { "<leader>arc", desc = "Review: clear all comments" },
     },
     ui = {

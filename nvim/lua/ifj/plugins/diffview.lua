@@ -8,8 +8,41 @@ return {
   config = function()
     local diffview = require("diffview")
 
+    -- Yank the path of the file/folder under the cursor in the file panel.
+    -- kind: "relative" (to cwd), "absolute", or "name" (basename)
+    local function yank_path(kind)
+      return function()
+        local view = require("diffview.lib").get_current_view()
+        if not view then
+          return
+        end
+        local item = view:infer_cur_file(true)
+        if not item or not item.path then
+          return
+        end
+        local root = view.adapter.ctx.toplevel
+        local abs = item.absolute_path or vim.fs.joinpath(root, item.path)
+        local path = vim.fn.fnamemodify(abs, ":.")
+        if kind == "absolute" then
+          path = abs
+        elseif kind == "name" then
+          path = vim.fs.basename(item.path)
+        end
+        vim.fn.setreg('"', path)
+        vim.fn.setreg("+", path)
+        vim.notify("Yanked: " .. path)
+      end
+    end
+
     -- enable comment
     diffview.setup({
+      keymaps = {
+        file_panel = {
+          { "n", "y", yank_path("relative"), { desc = "Yank relative path" } },
+          { "n", "Y", yank_path("absolute"), { desc = "Yank absolute path" } },
+          { "n", "gy", yank_path("name"), { desc = "Yank file name" } },
+        },
+      },
       file_panel = {
         listing_style = "tree", -- One of 'list' or 'tree'
         tree_options = { -- Only applies when listing_style is 'tree'
