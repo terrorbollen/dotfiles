@@ -3,6 +3,8 @@
 # Ported from the p10k "lean" ascii config: two lines, dir + git on top,
 # a vi-mode aware prompt char below, status/duration/jobs/versions on the right.
 add_newline = false
+# The 500ms default is too tight for a cold git status under load (many agents)
+command_timeout = 1000
 
 format = """
 $username\
