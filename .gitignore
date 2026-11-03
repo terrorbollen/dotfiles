@@ -15,3 +15,11 @@ automatic_backups
 /git/private.config
 
 .zcompdump-Isaks-MacBook-*
+
+/gh/hosts.yml
+/jj/repos
+/herdr/*
+!/herdr/config.toml
+/opencode/*
+!/opencode/tui.jsonc
+!/opencode/cli.json
