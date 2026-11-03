@@ -17,8 +17,10 @@ post_create:
   # New worktree paths are untrusted even when the main checkout is trusted
   - mise trust --quiet 2>/dev/null || true
   # APFS clone instead of a symlink: near-free on disk, but installs in the
-  # worktree no longer mutate the main checkout's node_modules
-  - '[ -d "$WM_PROJECT_ROOT/node_modules" ] && cp -cR "$WM_PROJECT_ROOT/node_modules" . || true'
+  # worktree no longer mutate the main checkout's node_modules. Cloning ~100k
+  # files still takes ~20s, so it runs in the background; cloning aside and
+  # moving it in leaves node_modules either absent or complete, never partial
+  - '[ -d "$WM_PROJECT_ROOT/node_modules" ] && (t=$(mktemp -d) && cp -cR "$WM_PROJECT_ROOT/node_modules" "$t" && mv "$t/node_modules" .; rm -rf "$t") >/dev/null 2>&1 & true'
 
 sidebar:
   group_by: project
