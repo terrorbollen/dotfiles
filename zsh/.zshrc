@@ -2,6 +2,8 @@
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+
 BREW_PREFIX=/opt/homebrew
 
 # History
@@ -89,3 +91,6 @@ source ~/.cache/zsh/zoxide.zsh
 
 # Must be sourced after all other widgets are defined
 source "$BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
+# Local, untracked machine overrides (not managed by the dotfiles repo)
+[[ -f "$HOME/.zshrc" ]] && source "$HOME/.zshrc"
