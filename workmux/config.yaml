@@ -22,3 +22,4 @@ post_create:
 
 sidebar:
   group_by: project
+  layout: compact
