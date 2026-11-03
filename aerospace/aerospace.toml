@@ -82,6 +82,7 @@ shift-alt-k = ['focus --boundaries-action wrap-around-the-workspace dfs-prev', '
 alt-o = 'exec-and-forget open -a /Applications/Obsidian.app'
 alt-s = 'exec-and-forget open -a /Applications/Slack.app'
 alt-t = 'exec-and-forget open -a /Applications/Alacritty.app'
+shift-alt-t = "exec-and-forget open -a 'Microsoft Teams'"
 alt-c = "exec-and-forget open -a 'Google Chrome'"
 alt-r = "exec-and-forget open -a /Applications/Linear.app"
 alt-w = "exec-and-forget open -a /Applications/Lens.app"
