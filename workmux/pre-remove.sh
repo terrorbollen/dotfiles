@@ -10,6 +10,19 @@ dirty=$(git status --porcelain | wc -l | tr -d ' ')
 # Commits on no remote and no other local branch are gone once this branch is
 branch=$(git symbolic-ref --quiet --short HEAD || true)
 unsaved=$(git rev-list --count HEAD --not --remotes --exclude="$branch" --branches)
+# A rebase merge lands copies with new ids and deletes the remote branch, so
+# the originals are on no remote: count only those whose change isn't on the
+# default branch either (by patch id; a squash merge still asks)
+base=$(git symbolic-ref --quiet --short refs/remotes/origin/HEAD || true)
+if [ "$unsaved" -gt 0 ] && [ -n "$base" ]; then
+  new=$(git cherry "$base" HEAD | sed -n 's/^+ //p')
+  if [ -z "$new" ]; then
+    unsaved=0
+  else
+    unsaved=$(git rev-list HEAD --not --remotes --exclude="$branch" --branches |
+      grep -cxF "$new" || true)
+  fi
+fi
 [ "$dirty" -eq 0 ] && [ "$unsaved" -eq 0 ] && exit 0
 
 backup="${XDG_STATE_HOME:-$HOME/.local/state}/workmux/backups/$WM_HANDLE-$(date +%Y%m%d-%H%M%S)"
