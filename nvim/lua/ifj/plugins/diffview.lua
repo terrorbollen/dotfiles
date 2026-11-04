@@ -4,6 +4,7 @@ return {
   keys = {
     { "<leader>dv", desc = "Toggle diffview" },
     { "<leader>dh", desc = "Toggle file history" },
+    { "<leader>dm", desc = "Toggle diff against main" },
   },
   config = function()
     local diffview = require("diffview")
@@ -85,8 +86,26 @@ return {
       end
     end
 
+    -- Diff the working tree against where the branch left main, so the view
+    -- shows what a PR would contain plus uncommitted work; `main...HEAD` would
+    -- drop the uncommitted part
+    local function toggle_diff_main()
+      local lib = require("diffview.lib")
+      if lib.get_current_view() ~= nil then
+        vim.cmd("DiffviewClose")
+        return
+      end
+      local base = vim.fn.systemlist({ "git", "merge-base", "main", "HEAD" })[1]
+      if vim.v.shell_error ~= 0 then
+        vim.notify("No merge base with main", vim.log.levels.ERROR)
+        return
+      end
+      vim.cmd("DiffviewOpen " .. base)
+    end
+
     local keymap = vim.keymap
     keymap.set("n", "<leader>dv", toggle_diffview, { desc = "Toggle diffview" })
+    keymap.set("n", "<leader>dm", toggle_diff_main, { desc = "Toggle diff against main" })
     keymap.set("n", "<leader>dh", toggle_file_history, { desc = "Toggle file history" })
   end,
 }
