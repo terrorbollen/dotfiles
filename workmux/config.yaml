@@ -22,6 +22,13 @@ post_create:
   # moving it in leaves node_modules either absent or complete, never partial
   - '[ -d "$WM_PROJECT_ROOT/node_modules" ] && (t=$(mktemp -d) && cp -cR "$WM_PROJECT_ROOT/node_modules" "$t" && mv "$t/node_modules" .; rm -rf "$t") >/dev/null 2>&1 & true'
 
+# The default layout is a shell and `clear`, which leaves `-P` prompts with
+# no agent pane to start in
+panes:
+  - command: <agent>
+    focus: true
+  - split: horizontal
+
 sidebar:
   group_by: project
   layout: compact
