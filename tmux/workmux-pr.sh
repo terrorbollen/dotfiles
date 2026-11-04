@@ -1,16 +1,14 @@
 #!/bin/sh
-# Pick an open PR with fzf and open it for review in a fresh workmux worktree.
+# Pick a PR awaiting your review with fzf and open it for review in a fresh workmux worktree.
 # The list call also fetches each body, so the preview reads a local file
 # instead of calling `gh pr view` (~1s) for every highlighted PR.
 set -e
 
 PR_FILE=$(mktemp)
-ME_FILE=$(mktemp)
-trap 'rm -f "$PR_FILE" "$ME_FILE"' EXIT
-gh api user --jq .login > "$ME_FILE" &
-gh pr list --limit 100 \
-  --json number,title,headRefName,body,author,isDraft,reviewDecision,reviewRequests,statusCheckRollup > "$PR_FILE"
-wait
+trap 'rm -f "$PR_FILE"' EXIT
+# review-requested also matches requests to your teams, unlike user-review-requested
+gh pr list --limit 100 --search "review-requested:@me" \
+  --json number,title,headRefName,body,author,isDraft,reviewDecision,statusCheckRollup > "$PR_FILE"
 
 export PR_FILE
 # Bodies are markdown with inline HTML (dependabot is mostly HTML): strip the
@@ -30,15 +28,13 @@ def ci: [.statusCheckRollup[] | (.conclusion // .state)] as $r
 def review: if .isDraft then c(90; "◌ draft")
   elif .reviewDecision == "CHANGES_REQUESTED" then c(31; "✗ changes")
   elif .reviewDecision == "APPROVED" then c(32; "✓ approved")
-  elif .author.login == $me then c(34; "★ yours")
-  elif any(.reviewRequests[]; .login == $me) then c("1;33"; "● review you")
   else c(37; "○ open") end;
 .[] | [.number, ci, review, .title, c(90; .author.login)] | @tsv'
 
 # FZF_DEFAULT_OPTS sets --tmux (no popup inside a popup) and --height 40% (half-empty popup)
-n=$(jq -r --arg me "$(cat "$ME_FILE")" "$ROWS_JQ" "$PR_FILE" |
+n=$(jq -r "$ROWS_JQ" "$PR_FILE" |
   fzf --no-tmux --height=100% --ansi --delimiter='\t' --prompt='PR> ' \
-    --header='CI ✓ pass  ✗ fail  … running   │   ● review you  ★ yours  ✓ approved  ✗ changes  ◌ draft' \
+    --header='CI ✓ pass  ✗ fail  … running   │   ✓ approved  ✗ changes  ◌ draft' \
     --preview='jq -r --argjson n {1} "$PREVIEW_JQ" "$PR_FILE" | glow --style=dark --width="$FZF_PREVIEW_COLUMNS" -' \
     --preview-window=wrap,60% \
     --bind='ctrl-d:preview-half-page-down,ctrl-u:preview-half-page-up' |
