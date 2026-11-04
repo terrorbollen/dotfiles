@@ -22,6 +22,11 @@ post_create:
   # moving it in leaves node_modules either absent or complete, never partial
   - '[ -d "$WM_PROJECT_ROOT/node_modules" ] && (t=$(mktemp -d) && cp -cR "$WM_PROJECT_ROOT/node_modules" "$t" && mv "$t/node_modules" .; rm -rf "$t") >/dev/null 2>&1 & true'
 
+# Setting this replaces the default node_modules cleanup, so it is listed again
+pre_remove:
+  - '"$HOME/.config/workmux/pre-remove.sh"'
+  - "<cleanup-node-modules>"
+
 # The default layout is a shell and `clear`, which leaves `-P` prompts with
 # no agent pane to start in
 panes:
