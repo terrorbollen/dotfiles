@@ -1,0 +1,25 @@
+# Default secret rules plus private details that are not secrets but must not
+# reach this public repo.
+
+[extend]
+useDefault = true
+
+[[rules]]
+id = "work-email"
+description = "Work email address"
+regex = '''[\w.+-]+@innspire\.com'''
+
+[[rules]]
+id = "org-email"
+description = "Email address at a client or former employer"
+regex = '''[\w.+-]+@(booli|loop[l]ab)\.\w+'''
+
+[[rules]]
+id = "former-employer"
+description = "Mention of a former employer"
+regex = '''(?i)loop[l]ab'''
+
+[[rules]]
+id = "home-path"
+description = "Absolute home path, use ~ or $HOME"
+regex = '''/Users/isakfriis\-jespersen'''
