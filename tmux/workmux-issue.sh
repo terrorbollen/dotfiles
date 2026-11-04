@@ -44,6 +44,8 @@ id=$(jq -r "$ROWS_JQ" "$ISSUE_FILE" |
 # Cancelled: exit 0 so display-popup -EE closes instead of holding the popup open
 [ -n "$id" ] || exit 0
 branch=$(jq -r --arg id "$id" '.data.viewer.assignedIssues.nodes[] | select(.identifier == $id) | .branchName' "$ISSUE_FILE")
+# Linear prefixes branchName with the full username; workmux handles read better short
+branch="isak/${branch#*/}"
 # Popups have no TMUX_PANE, which workmux needs to know where it is
 export TMUX_PANE=$(tmux display -p '#{pane_id}')
 # -o reopens the worktree of an issue already in progress instead of failing.
