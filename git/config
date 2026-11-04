@@ -12,10 +12,6 @@
   autoStash = true
 [push]
   autoSetupRemote = true
-[includeIf "gitdir:~/booli/"]
-  path = ~/booli/.gitconfig
-[includeIf "gitdir:~/innspire/"]
-  path = ~/innspire/.gitconfig
 [core]
   pager = delta
   preloadindex = true
@@ -57,3 +53,8 @@
 	helper = /usr/local/share/gcm-core/git-credential-manager
 [credential "https://dev.azure.com"]
 	useHttpPath = true
+# Last, so per-org settings (identity, credentials) override everything above
+[includeIf "gitdir:~/booli/"]
+  path = ~/booli/.gitconfig
+[includeIf "gitdir:~/innspire/"]
+  path = ~/innspire/.gitconfig

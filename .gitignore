@@ -1,17 +1,38 @@
-/argocd
-/yarn
-/github-copilot
-/nvchad
-/lazy-vim
-/iterm2
-/coc
-/kitty
+# Allowlist: apps write all sorts of state into ~/.config, so nothing is
+# tracked unless it is listed here.
+/*
+!/.gitignore
+!/.githooks/
+!/.gitleaks.toml
+!/Brewfile
+!/README.md
+!/aerospace/
+!/alacritty/
+!/btop/
+!/gh/
+!/git/
+!/gonzo/
+!/herdr/
+!/karabiner/
+!/nvim/
+!/opencode/
+!/starship.toml
+!/tmux/
+!/workmux/
+!/zsh/
+
 /tmux/plugins
 /zsh/.zsh_history
 /zsh/.zsh_sessions
-/raycast
 
 automatic_backups
 /git/private.config
 
 .zcompdump-Isaks-MacBook-*
+
+/gh/hosts.yml
+/herdr/*
+!/herdr/config.toml
+/opencode/*
+!/opencode/tui.jsonc
+!/opencode/cli.json

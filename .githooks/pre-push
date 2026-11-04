@@ -1,0 +1,26 @@
+#!/bin/sh
+# Scans only the commits being pushed: history already on the remote predates
+# these rules and is not rescanned.
+set -eu
+
+command -v gitleaks >/dev/null || {
+  echo "pre-push: gitleaks is not installed (brew bundle), refusing to push" >&2
+  exit 1
+}
+
+# Taken from the hook's own checkout so worktrees on older branches use the current rules.
+config="$(dirname "$0")/../.gitleaks.toml"
+zero=0000000000000000000000000000000000000000
+
+while read -r local_ref local_sha _remote_ref remote_sha; do
+  [ "$local_sha" = "$zero" ] && continue
+  if [ "$remote_sha" = "$zero" ]; then
+    range="$local_sha --not --remotes=$1"
+  else
+    range="$remote_sha..$local_sha"
+  fi
+  gitleaks git --no-banner --redact -v -c "$config" --log-opts="$range" . || {
+    echo "pre-push: gitleaks found leaks in $local_ref, push blocked" >&2
+    exit 1
+  }
+done
