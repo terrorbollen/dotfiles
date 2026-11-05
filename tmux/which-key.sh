@@ -31,6 +31,9 @@ if [[ -z $WK_PANEL ]]; then
   exit 0
 fi
 
+# A key pressed while the popup was opening went to tmux, not to this panel
+[[ $(tmux display -c $client -p '#{client_key_table}') == $table ]] || exit 0
+
 # A cursor would sit in the panel, as if it were somewhere to type
 printf '\e[?25l'
 for ((i = 1; i < $#hints; i += 2)); do
