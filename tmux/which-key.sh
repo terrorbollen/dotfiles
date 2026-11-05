@@ -6,7 +6,8 @@ table=$1 client=$2
 case $table in
   prefix) hints=(
     c window  - split  '|' vsplit  m zoom  v copy  w +workmux
-    D docker  K k9s  Q sql  Y yazi  T term  r reload  '?' 'all keys'
+    D docker  K k9s  Q sql  Y yazi  T term  g github  l linear
+    r reload  '?' 'all keys'
   ) ;;
   workmux) hints=(
     n 'new feature'  a 'new feature+prompt'  p 'my reviews'  i 'start issue'
