@@ -31,9 +31,6 @@ if [[ -z $WK_PANEL ]]; then
   exit 0
 fi
 
-# A key pressed while the popup was opening went to tmux, not to this panel
-[[ $(tmux display -c $client -p '#{client_key_table}') == $table ]] || exit 0
-
 # A cursor would sit in the panel, as if it were somewhere to type
 printf '\e[?25l'
 for ((i = 1; i < $#hints; i += 2)); do
@@ -43,7 +40,13 @@ done
 
 # The popup takes all input, so the key has to be handed back to tmux. It must
 # land after the popup closes, or the popup would swallow it again.
-read -rsk1 key
+# A key pressed while the popup was opening went to tmux instead, and bindings
+# that repeat stay in the table for a moment, so watch for the table changing
+while [[ $(tmux display -c $client -p '#{client_key_table}') == $table ]]; do
+  read -rsk1 -t0.1 key && break
+done
+[[ -n $key ]] || exit 0
+
 case $key in
   $'\e')
     if read -rsk2 -t0.02 rest; then
