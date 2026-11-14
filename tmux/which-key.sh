@@ -10,7 +10,7 @@ case $table in
     r reload  '?' 'all keys'
   ) ;;
   workmux) hints=(
-    n 'new feature'  a 'new feature+prompt'  p 'my reviews'  i 'start issue'
+    n 'new feature'  p 'my reviews'  i 'start issue'
     d dashboard  l linear  w worktrees  s sidebar  r rebase  m 'land merged'
     x remove  g 'clean merged'
   ) ;;
