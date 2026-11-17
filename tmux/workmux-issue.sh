@@ -63,4 +63,4 @@ branch="isak/${branch#*/}"
 export TMUX_PANE=$(tmux display -p '#{pane_id}')
 # -o reopens the worktree of an issue already in progress instead of failing.
 # -a without -p starts Claude with an empty input: sometimes it's just a chat
-workmux add -o "$branch" --session -a claude
+workmux add -o "$branch" -a claude
