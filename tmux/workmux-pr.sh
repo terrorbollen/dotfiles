@@ -47,4 +47,4 @@ n=$(jq -r "$ROWS_JQ" "$PR_FILE" |
 export TMUX_PANE=$(tmux display -p '#{pane_id}')
 # A local review-<n> branch never collides with an existing checkout of the
 # PR branch (e.g. your own PR), so this always gets a fresh worktree
-exec workmux add -o --pr "$n" "review-$n" --session
+exec workmux add -o --pr "$n" "review-$n"
