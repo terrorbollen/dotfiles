@@ -12,7 +12,7 @@ case $table in
   workmux) hints=(
     n 'new feature'  p 'my reviews'  i 'search issue'
     d dashboard  l linear  w worktrees  s sidebar  r rebase  m 'land merged'
-    x remove  g 'clean merged'  o 'agent on main'
+    x remove  g 'clean merged'  o 'agent on main'  f 'feature session'
   ) ;;
 esac
 
