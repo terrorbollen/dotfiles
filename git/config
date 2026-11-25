@@ -31,6 +31,9 @@
   diffFilter = delta --color-only
 [delta]
   navigate = true    # use n and N to move between diff sections
+  hyperlinks = true  # commits link to GitHub
+  # files open through tmux/open-ref.sh (nvim popup) instead of file:// in Finder
+  hyperlinks-file-link-format = "{path}:{line}"
 [merge]
   conflictstyle = diff3
 [diff]
