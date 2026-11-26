@@ -30,5 +30,5 @@ panes:
   - split: horizontal
 
 sidebar:
-  group_by: session
+  group_by: project
   layout: compact
