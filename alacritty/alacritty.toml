@@ -90,6 +90,6 @@ regex = "(ipfs:|ipns:|magnet:|mailto:|gemini://|gopher://|https://|http://|news:
 
 # INN-123 (also lowercase in branch names), #123 and path/to/file.ext:42
 [[hints.enabled]]
-regex = '(?i)\binn-[0-9]+\b|#[0-9]{1,5}\b|[\w./~-]*\w\.\w+:[0-9]+'
+regex = '(?i)(?-u:\b)inn-[0-9]+(?-u:\b)|#[0-9]{1,5}(?-u:\b)|[\w./~-]*\w\.\w+:[0-9]+'
 command = { program = "sh", args = ["-c", '"$HOME/.config/tmux/open-ref.sh" "$0"'] }
 mouse = { enabled = true, mods = "Command" }
